@@ -136,7 +136,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
 /* reset */
 .rbtn{width:100%;padding:13px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.3);font-size:12px;cursor:pointer;font-family:inherit;margin-top:6px}
 
-/* ‚îÄ‚îÄ My Meals ‚îÄ‚îÄ */
+/* -- My Meals -- */
 .mm-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .mm-hdr h2{font-size:19px;font-weight:800}
 .btn-pink{background:#f472b6;color:#0c0c0e;border:none;border-radius:12px;padding:10px 18px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit}
@@ -170,7 +170,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
 .atd-pick{background:rgba(255,255,255,.06);border-radius:13px;padding:12px;margin-top:8px;display:none}
 .atd-pick.open{display:block}
 
-/* ‚îÄ‚îÄ Scan ‚îÄ‚îÄ */
+/* -- Scan -- */
 .scan-zone{border:2px dashed rgba(255,255,255,.12);border-radius:18px;padding:40px 20px;text-align:center;cursor:pointer;transition:border-color .2s}
 .scan-zone:active{border-color:rgba(244,114,182,.4)}
 .scan-zone .ic{font-size:42px;margin-bottom:10px}
@@ -186,7 +186,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
 .api-card p{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:10px;line-height:1.6}
 .api-link{font-size:11px;color:rgba(255,255,255,.2);cursor:pointer;margin-top:14px;background:none;border:none;font-family:inherit}
 
-/* ‚îÄ‚îÄ Budget ‚îÄ‚îÄ */
+/* -- Budget -- */
 .bud-month{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:14px}
 .bud-month button{background:none;border:none;color:rgba(255,255,255,.3);font-size:20px;cursor:pointer;padding:4px 8px}
 .bud-month span{font-size:15px;font-weight:800;min-width:140px;text-align:center}
@@ -212,7 +212,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
   <div id="topbar">
     <div class="eye">ARYA'S</div>
     <div class="bname">Big Booty Small Waist<br><em>Bad Bitch Protocol</em></div>
-    <div class="bsub">56 kg ¬∑ 158 cm ¬∑ Nurse 10am‚Äì7pm ¬∑ Bangkok ¬∑ Shred mode üî•</div>
+    <div class="bsub">56 kg &middot; 158 cm &middot; Nurse 10am-7pm &middot; Bangkok &middot; Shred mode &#128293;</div>
   </div>
 
   <div id="scroll">
@@ -224,7 +224,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
         <button class="dtab" id="dt1" onclick="setDay(1)">Day 2</button>
         <button class="dtab" id="dt2" onclick="setDay(2)">Day 3</button>
       </div>
-      <div id="dlabel">Rotate breakfast ¬∑ 7-Eleven lunch ¬∑ home dinner</div>
+      <div id="dlabel">Rotate breakfast &middot; 7-Eleven lunch &middot; home dinner</div>
       <div class="card">
         <div class="ring-row">
           <div class="rw">
@@ -235,7 +235,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
             <div class="ri"><div class="rn" id="rnum">0</div><div class="ru">kcal</div></div>
           </div>
           <div style="flex:1">
-            <div class="rmsg" id="rmsg">Tap meals to track üí™</div>
+            <div class="rmsg" id="rmsg">Tap meals to track &#128170;</div>
             <div class="brow"><div class="blbl" style="color:#4ade80">Protein</div><div class="btrk"><div class="bfil" id="bp" style="background:#4ade80;width:0%"></div></div><div class="bval" id="vp">0/120g</div></div>
             <div class="brow"><div class="blbl" style="color:#60a5fa">Carbs</div><div class="btrk"><div class="bfil" id="bc" style="background:#60a5fa;width:0%"></div></div><div class="bval" id="vc">0/115g</div></div>
             <div class="brow" style="margin-bottom:0"><div class="blbl" style="color:#fbbf24">Fat</div><div class="btrk"><div class="bfil" id="bf" style="background:#fbbf24;width:0%"></div></div><div class="bval" id="vf">0/42g</div></div>
@@ -247,11 +247,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
 
     <!-- GROCERY -->
     <div class="pg" id="pg-grocery">
-      <div class="sec">GROCERY LIST ‚Äî 3 DAYS</div>
+      <div class="sec">GROCERY LIST &mdash; 3 DAYS</div>
       <div class="card">
         <div style="display:flex;justify-content:space-between">
-          <div><div style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:3px">3-day total</div><div style="font-size:24px;font-weight:800">‡∏ø840</div><div style="font-size:10px;color:rgba(255,255,255,.26);margin-top:2px">incl. 7-Eleven delivery</div></div>
-          <div style="text-align:right"><div style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:3px">in cart</div><div style="font-size:24px;font-weight:800;color:#4ade80">‡∏ø<span id="gcart">0</span></div><div style="font-size:10px;color:rgba(255,255,255,.26);margin-top:2px"><span id="gcnt">0</span> items</div></div>
+          <div><div style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:3px">3-day total</div><div style="font-size:24px;font-weight:800">&#3647;840</div><div style="font-size:10px;color:rgba(255,255,255,.26);margin-top:2px">incl. 7-Eleven delivery</div></div>
+          <div style="text-align:right"><div style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:3px">in cart</div><div style="font-size:24px;font-weight:800;color:#4ade80">&#3647;<span id="gcart">0</span></div><div style="font-size:10px;color:rgba(255,255,255,.26);margin-top:2px"><span id="gcnt">0</span> items</div></div>
         </div>
       </div>
       <div id="grocwrap"></div>
@@ -262,7 +262,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
     <div class="pg" id="pg-meals">
       <div class="mm-hdr">
         <h2>My Meals</h2>
-        <button class="btn-pink-sm" onclick="openMealModal()">Ôºã New Meal</button>
+        <button class="btn-pink-sm" onclick="openMealModal()">+ New Meal</button>
       </div>
       <div id="mealslist"></div>
     </div>
@@ -270,17 +270,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
     <!-- BUDGET -->
     <div class="pg" id="pg-budget">
       <div class="bud-month">
-        <button onclick="budNav(-1)">‚Üê</button>
+        <button onclick="budNav(-1)">&larr;</button>
         <span id="bud-month-label"></span>
-        <button onclick="budNav(1)">‚Üí</button>
+        <button onclick="budNav(1)">&rarr;</button>
       </div>
       <div class="card" id="bud-summary"></div>
       <div style="margin-top:12px">
-        <button class="btn-outline" style="width:100%" onclick="togBudQuick()">Ôºã Add Purchase</button>
+        <button class="btn-outline" style="width:100%" onclick="togBudQuick()">+ Add Purchase</button>
         <div class="bud-quick" id="bud-quick">
           <div style="padding:12px 0">
             <div class="finp-row" style="margin-bottom:8px">
-              <input class="finp" type="number" id="bud-amt" placeholder="‡∏ø Amount" inputmode="decimal">
+              <input class="finp" type="number" id="bud-amt" placeholder="&#3647; Amount" inputmode="decimal">
               <input class="finp" type="text" id="bud-note" placeholder="Note (e.g. 7-Eleven lunch)">
             </div>
             <button class="btn-pink" style="width:100%" onclick="addBudEntry()">Save</button>
@@ -327,7 +327,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
       </div>
       <div class="flbl">RECIPE STEPS</div>
       <div id="mm-steps"></div>
-      <button class="btn-outline" style="margin-top:4px" onclick="addStepRow()">Ôºã Add step</button>
+      <button class="btn-outline" style="margin-top:4px" onclick="addStepRow()">+ Add step</button>
       <div class="flbl">HINT / TIP (optional)</div>
       <input class="finp" id="mm-hint" placeholder="e.g. Use half the sauce">
       <div style="display:flex;gap:8px;margin-top:18px">
@@ -362,10 +362,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
   </div>
 
   <div id="botnav">
-    <button class="ni on" id="ni-today" onclick="nav('today')"><span class="ni-ic">üìã</span><span class="ni-lb">TRACK</span></button>
-    <button class="ni" id="ni-meals" onclick="nav('meals')"><span class="ni-ic">üçΩ</span><span class="ni-lb">MEALS</span></button>
-    <button class="ni" id="ni-grocery" onclick="nav('grocery')"><span class="ni-ic">üõí</span><span class="ni-lb">GROCERY</span></button>
-    <button class="ni" id="ni-budget" onclick="nav('budget')"><span class="ni-ic">üí∞</span><span class="ni-lb">BUDGET</span></button>
+    <button class="ni on" id="ni-today" onclick="nav('today')"><span class="ni-ic">&#128203;</span><span class="ni-lb">TRACK</span></button>
+    <button class="ni" id="ni-meals" onclick="nav('meals')"><span class="ni-ic">&#127869;</span><span class="ni-lb">MEALS</span></button>
+    <button class="ni" id="ni-grocery" onclick="nav('grocery')"><span class="ni-ic">&#128722;</span><span class="ni-lb">GROCERY</span></button>
+    <button class="ni" id="ni-budget" onclick="nav('budget')"><span class="ni-ic">&#128176;</span><span class="ni-lb">BUDGET</span></button>
   </div>
 
 </div>
@@ -374,111 +374,111 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
 var T={kcal:1380,p:120,c:115,f:42};
 
 var DAYS=[
-  {label:"Rotate breakfast ¬∑ 7-Eleven lunch ¬∑ home dinner",meals:[
-    {ty:"Breakfast",ti:"8:00‚Äì8:30 am",name:"Banana + boiled eggs + berries",desc:"1 small banana ¬∑ 2 boiled eggs ¬∑ 50g blueberries",kcal:310,p:14,c:38,f:10,src:"home",recipe:[
-      {s:"Night before",t:"<b>Boil 6‚Äì8 eggs</b> for 10 min. Cool, refrigerate unpeeled. This covers your whole week ‚Äî do it once on Sunday and Wednesday."},
-      {s:"Morning ‚Äî 2 min",t:"Peel 2 cold eggs. Grab 1 small banana and 50g blueberries. You have time with a 10am start ‚Äî eat sitting down properly."},
+  {label:"Rotate breakfast &middot; 7-Eleven lunch &middot; home dinner",meals:[
+    {ty:"Breakfast",ti:"8:00&ndash;8:30 am",name:"Banana + boiled eggs + berries",desc:"1 small banana &middot; 2 boiled eggs &middot; 50g blueberries",kcal:310,p:14,c:38,f:10,src:"home",recipe:[
+      {s:"Night before",t:"<b>Boil 6&ndash;8 eggs</b> for 10 min. Cool, refrigerate unpeeled. This covers your whole week &mdash; do it once on Sunday and Wednesday."},
+      {s:"Morning &mdash; 2 min",t:"Peel 2 cold eggs. Grab 1 small banana and 50g blueberries. You have time with a 10am start &mdash; eat sitting down properly."},
       {s:"Done",t:"Eat by 8:30am, leave for work at 9:30am. <b>No cooking, no rush.</b>"}
     ]},
-    {ty:"Lunch",ti:"1:00‚Äì2:00 pm",name:"Grilled chicken rice box + PH water",desc:"Grilled chicken breast rice box 59‡∏ø ¬∑ PH Plus water 30‡∏ø ‚Äî order via 7-Eleven app",kcal:420,p:35,c:52,f:8,src:"7-eleven",recipe:[
-      {s:"Order this",t:"<b>Grilled chicken breast rice box</b> ‚Äî 59‡∏ø. Best macro item on the 7-Eleven menu for your goals."},
-      {s:"The sauce",t:"The dipping sauce is mostly tamarind and sugar. <b>Use half or skip it</b> ‚Äî saves 40‚Äì60 kcal you don't need."},
-      {s:"Order tip",t:"Order ahead on the app before your break so it arrives on time. Add PH Plus water (30‡∏ø). <b>Sit down and actually take your break.</b>"}
+    {ty:"Lunch",ti:"1:00&ndash;2:00 pm",name:"Grilled chicken rice box + PH water",desc:"Grilled chicken breast rice box 59&#3647; &middot; PH Plus water 30&#3647; &mdash; order via 7-Eleven app",kcal:420,p:35,c:52,f:8,src:"7-eleven",recipe:[
+      {s:"Order this",t:"<b>Grilled chicken breast rice box</b> &mdash; 59&#3647;. Best macro item on the 7-Eleven menu for your goals."},
+      {s:"The sauce",t:"The dipping sauce is mostly tamarind and sugar. <b>Use half or skip it</b> &mdash; saves 40&ndash;60 kcal you don't need."},
+      {s:"Order tip",t:"Order ahead on the app before your break so it arrives on time. Add PH Plus water (30&#3647;). <b>Sit down and actually take your break.</b>"}
     ]},
-    {ty:"Dinner",ti:"8:00‚Äì8:30 pm",name:"Garlic chicken rice",desc:"150g chicken breast ¬∑ 70g jasmine rice ¬∑ garlic ¬∑ spring onion",kcal:480,p:52,c:36,f:8,src:"home",recipe:[
-      {s:"Home at 7:30 ‚Äî rest first",t:"Change clothes, sit for 15‚Äì20 min. <b>Don't cook the second you walk in.</b> You just did a 9-hour shift."},
-      {s:"Batch rice once",t:"Cook 300g dry rice at once. Portion into 70g servings. Lasts 3 days ‚Äî just reheat tonight's portion."},
-      {s:"Marinate",t:"Slice 150g chicken breast thin. Mix with <b>4‚Äì5 crushed garlic cloves</b>, pinch of white pepper, 1 tsp fish sauce. Rest 10 min."},
-      {s:"Cook ‚Äî 8 min",t:"Non-stick pan high heat. Half tsp oil or spray. Garlic first ‚Äî 30 sec until golden. Add chicken, stir-fry <b>4‚Äì5 min</b> until cooked through."},
+    {ty:"Dinner",ti:"8:00&ndash;8:30 pm",name:"Garlic chicken rice",desc:"150g chicken breast &middot; 70g jasmine rice &middot; garlic &middot; spring onion",kcal:480,p:52,c:36,f:8,src:"home",recipe:[
+      {s:"Home at 7:30 &mdash; rest first",t:"Change clothes, sit for 15&ndash;20 min. <b>Don't cook the second you walk in.</b> You just did a 9-hour shift."},
+      {s:"Batch rice once",t:"Cook 300g dry rice at once. Portion into 70g servings. Lasts 3 days &mdash; just reheat tonight's portion."},
+      {s:"Marinate",t:"Slice 150g chicken breast thin. Mix with <b>4&ndash;5 crushed garlic cloves</b>, pinch of white pepper, 1 tsp fish sauce. Rest 10 min."},
+      {s:"Cook &mdash; 8 min",t:"Non-stick pan high heat. Half tsp oil or spray. Garlic first &mdash; 30 sec until golden. Add chicken, stir-fry <b>4&ndash;5 min</b> until cooked through."},
       {s:"Season and eat",t:"Add 1 tsp oyster sauce, tiny splash fish sauce. Toss 30 sec. Plate over rice, top with spring onion. <b>Total: 8 minutes.</b>"}
     ]}
   ]},
-  {label:"Rotate breakfast ¬∑ 7-Eleven lunch ¬∑ home dinner",meals:[
-    {ty:"Breakfast",ti:"8:00‚Äì8:30 am",name:"Overnight oats + banana + egg",desc:"40g oats soaked overnight ¬∑ 1 banana ¬∑ 1 boiled egg",kcal:340,p:16,c:52,f:7,src:"home",recipe:[
-      {s:"Night before ‚Äî 90 sec",t:"Put <b>40g rolled oats</b> in a jar. Add 120ml water or splash of milk. Lid on, fridge. Done."},
-      {s:"Morning ‚Äî 1 min",t:"Take jar out. Slice 1 banana on top. Grab a cold boiled egg. Eat at home ‚Äî <b>10am start means zero rush.</b>"},
-      {s:"No cooking",t:"Oats are eaten cold ‚Äî overnight oats need no reheating. Chewy, filling, ready in 60 seconds."}
+  {label:"Rotate breakfast &middot; 7-Eleven lunch &middot; home dinner",meals:[
+    {ty:"Breakfast",ti:"8:00&ndash;8:30 am",name:"Overnight oats + banana + egg",desc:"40g oats soaked overnight &middot; 1 banana &middot; 1 boiled egg",kcal:340,p:16,c:52,f:7,src:"home",recipe:[
+      {s:"Night before &mdash; 90 sec",t:"Put <b>40g rolled oats</b> in a jar. Add 120ml water or splash of milk. Lid on, fridge. Done."},
+      {s:"Morning &mdash; 1 min",t:"Take jar out. Slice 1 banana on top. Grab a cold boiled egg. Eat at home &mdash; <b>10am start means zero rush.</b>"},
+      {s:"No cooking",t:"Oats are eaten cold &mdash; overnight oats need no reheating. Chewy, filling, ready in 60 seconds."}
     ]},
-    {ty:"Lunch",ti:"1:00‚Äì2:00 pm",name:"Protein shake + grilled chicken rice box",desc:"Farmhouse banana shake 49‡∏ø + chicken rice box 59‡∏ø ‚Äî 7-Eleven delivery",kcal:490,p:66,c:54,f:10,src:"7-eleven",recipe:[
-      {s:"Order both",t:"<b>Farmhouse high-protein banana shake</b> (49‡∏ø) + grilled chicken rice box (59‡∏ø). Total 108‡∏ø. Highest protein lunch of the week ‚Äî 66g in one meal."},
-      {s:"Why the shake today",t:"Breakfast was oats + egg ‚Äî moderate protein. The shake bumps you up to <b>hit your 120g daily target</b> without needing a massive dinner."},
+    {ty:"Lunch",ti:"1:00&ndash;2:00 pm",name:"Protein shake + grilled chicken rice box",desc:"Farmhouse banana shake 49&#3647; + chicken rice box 59&#3647; &mdash; 7-Eleven delivery",kcal:490,p:66,c:54,f:10,src:"7-eleven",recipe:[
+      {s:"Order both",t:"<b>Farmhouse high-protein banana shake</b> (49&#3647;) + grilled chicken rice box (59&#3647;). Total 108&#3647;. Highest protein lunch of the week &mdash; 66g in one meal."},
+      {s:"Why the shake today",t:"Breakfast was oats + egg &mdash; moderate protein. The shake bumps you up to <b>hit your 120g daily target</b> without needing a massive dinner."},
       {s:"How to eat",t:"Drink the shake first, eat the rice box after. Skip or use half the sauce. Order ahead on the app."}
     ]},
-    {ty:"Dinner",ti:"8:00‚Äì8:30 pm",name:"Pan-seared steak + avocado + raspberries",desc:"130g lean sirloin ¬∑ ¬º avocado ¬∑ 80g raspberries",kcal:430,p:38,c:12,f:22,src:"home",recipe:[
-      {s:"Rest first",t:"Home at 7:30 ‚Äî <b>decompress 15‚Äì20 min</b> before you even think about cooking."},
-      {s:"Rest the steak",t:"Take steak out of fridge 15 min before cooking. Pat completely dry with paper towel ‚Äî this is how you get a crust with no oil."},
-      {s:"Sear ‚Äî 6 min",t:"Non-stick pan on <b>maximum heat</b> until it smokes. Add steak ‚Äî no oil. Don't touch for 2.5 min. Flip, 2.5 more min. Medium for 1.5cm thickness."},
-      {s:"Rest and plate",t:"Rest steak <b>2‚Äì3 min</b> before slicing. Fan out ¬º avocado, add 80g raspberries. Done."}
+    {ty:"Dinner",ti:"8:00&ndash;8:30 pm",name:"Pan-seared steak + avocado + raspberries",desc:"130g lean sirloin &middot; &frac14; avocado &middot; 80g raspberries",kcal:430,p:38,c:12,f:22,src:"home",recipe:[
+      {s:"Rest first",t:"Home at 7:30 &mdash; <b>decompress 15&ndash;20 min</b> before you even think about cooking."},
+      {s:"Rest the steak",t:"Take steak out of fridge 15 min before cooking. Pat completely dry with paper towel &mdash; this is how you get a crust with no oil."},
+      {s:"Sear &mdash; 6 min",t:"Non-stick pan on <b>maximum heat</b> until it smokes. Add steak &mdash; no oil. Don't touch for 2.5 min. Flip, 2.5 more min. Medium for 1.5cm thickness."},
+      {s:"Rest and plate",t:"Rest steak <b>2&ndash;3 min</b> before slicing. Fan out &frac14; avocado, add 80g raspberries. Done."}
     ]}
   ]},
-  {label:"Rotate breakfast ¬∑ 7-Eleven lunch ¬∑ home dinner",meals:[
-    {ty:"Breakfast",ti:"8:00‚Äì8:30 am",name:"Eggs + avocado + raspberries",desc:"2 boiled eggs ¬∑ ¬º avocado ¬∑ 60g raspberries",kcal:280,p:14,c:10,f:18,src:"home",recipe:[
-      {s:"2 min grab",t:"2 cold boiled eggs from fridge. Slice <b>¬º avocado</b> (wrap the rest with seed in cling film ‚Äî stops browning). Pack 60g raspberries."},
-      {s:"Why this works",t:"High fat + protein keeps you full <b>all the way to your 1pm break</b> ‚Äî 4.5 hours no problem."},
-      {s:"Relax",t:"10am start ‚Äî eat at home, sit down. <b>No rushing out the door.</b>"}
+  {label:"Rotate breakfast &middot; 7-Eleven lunch &middot; home dinner",meals:[
+    {ty:"Breakfast",ti:"8:00&ndash;8:30 am",name:"Eggs + avocado + raspberries",desc:"2 boiled eggs &middot; &frac14; avocado &middot; 60g raspberries",kcal:280,p:14,c:10,f:18,src:"home",recipe:[
+      {s:"2 min grab",t:"2 cold boiled eggs from fridge. Slice <b>&frac14; avocado</b> (wrap the rest with seed in cling film &mdash; stops browning). Pack 60g raspberries."},
+      {s:"Why this works",t:"High fat + protein keeps you full <b>all the way to your 1pm break</b> &mdash; 4.5 hours no problem."},
+      {s:"Relax",t:"10am start &mdash; eat at home, sit down. <b>No rushing out the door.</b>"}
     ]},
-    {ty:"Lunch",ti:"1:00‚Äì2:00 pm",name:"Grilled chicken rice box + granola bar",desc:"Grilled chicken rice box 59‡∏ø + Almond granola bar 20‡∏ø ‚Äî 7-Eleven delivery",kcal:450,p:37,c:60,f:10,src:"7-eleven",recipe:[
-      {s:"Order this combo",t:"Grilled chicken rice box (59‡∏ø) + 1 granola bar almond choc (20‡∏ø). Total 79‡∏ø."},
-      {s:"The granola bar",t:"About 100 kcal, mostly oats and almonds. <b>Eat it after the rice box</b> ‚Äî it's a finisher. Max 1 per day."},
+    {ty:"Lunch",ti:"1:00&ndash;2:00 pm",name:"Grilled chicken rice box + granola bar",desc:"Grilled chicken rice box 59&#3647; + Almond granola bar 20&#3647; &mdash; 7-Eleven delivery",kcal:450,p:37,c:60,f:10,src:"7-eleven",recipe:[
+      {s:"Order this combo",t:"Grilled chicken rice box (59&#3647;) + 1 granola bar almond choc (20&#3647;). Total 79&#3647;."},
+      {s:"The granola bar",t:"About 100 kcal, mostly oats and almonds. <b>Eat it after the rice box</b> &mdash; it's a finisher. Max 1 per day."},
       {s:"Why today",t:"Day 3 breakfast was low-carb (eggs + avocado). The granola bar bumps carbs up to keep <b>energy good for the last stretch of shift.</b>"}
     ]},
-    {ty:"Dinner",ti:"8:00‚Äì8:30 pm",name:"Garlic chicken + rice + banana",desc:"150g chicken breast ¬∑ 60g jasmine rice ¬∑ garlic ¬∑ 1 small banana",kcal:470,p:50,c:50,f:8,src:"home",recipe:[
+    {ty:"Dinner",ti:"8:00&ndash;8:30 pm",name:"Garlic chicken + rice + banana",desc:"150g chicken breast &middot; 60g jasmine rice &middot; garlic &middot; 1 small banana",kcal:470,p:50,c:50,f:8,src:"home",recipe:[
       {s:"Same garlic chicken",t:"Cook garlic chicken exactly as Day 1. 8 minutes. You know this by now."},
-      {s:"The banana",t:"Eat the banana <b>after dinner</b> ‚Äî it's your treat. 7pm finish, long shift, you earned it."},
-      {s:"End of cycle",t:"Day 3 done. Tonight: <b>boil 6‚Äì8 eggs, soak oats in a jar, check grocery list.</b> Reset and repeat."}
+      {s:"The banana",t:"Eat the banana <b>after dinner</b> &mdash; it's your treat. 7pm finish, long shift, you earned it."},
+      {s:"End of cycle",t:"Day 3 done. Tonight: <b>boil 6&ndash;8 eggs, soak oats in a jar, check grocery list.</b> Reset and repeat."}
     ]}
   ]}
 ];
 
 var GROC=[
-  {cat:"HOME ‚Äî PROTEINS",items:[
-    {n:"Chicken breast",note:"450g ¬∑ wet market / Lotus ¬∑ 3 dinners",price:75},
-    {n:"Lean sirloin steak",note:"150g ¬∑ Big C / Villa Market ¬∑ Day 2 dinner",price:90},
-    {n:"Eggs",note:"10 pack ¬∑ any market",price:45}
+  {cat:"HOME &mdash; PROTEINS",items:[
+    {n:"Chicken breast",note:"450g &middot; wet market / Lotus &middot; 3 dinners",price:75},
+    {n:"Lean sirloin steak",note:"150g &middot; Big C / Villa Market &middot; Day 2 dinner",price:90},
+    {n:"Eggs",note:"10 pack &middot; any market",price:45}
   ]},
-  {cat:"HOME ‚Äî FRUITS",items:[
-    {n:"Raspberries",note:"150g ¬∑ Tops / Gourmet Market",price:75},
-    {n:"Blueberries",note:"125g ¬∑ Tops / Villa",price:79},
-    {n:"Banana (kluay hom)",note:"5 small ¬∑ any market",price:20},
-    {n:"Avocado",note:"2 pcs ¬∑ Tops / Lotus",price:80}
+  {cat:"HOME &mdash; FRUITS",items:[
+    {n:"Raspberries",note:"150g &middot; Tops / Gourmet Market",price:75},
+    {n:"Blueberries",note:"125g &middot; Tops / Villa",price:79},
+    {n:"Banana (kluay hom)",note:"5 small &middot; any market",price:20},
+    {n:"Avocado",note:"2 pcs &middot; Tops / Lotus",price:80}
   ]},
-  {cat:"HOME ‚Äî GRAINS & PANTRY",items:[
-    {n:"Jasmine rice",note:"500g ¬∑ any supermarket",price:25},
-    {n:"Rolled oats",note:"500g ¬∑ Tops / Lotus",price:65},
-    {n:"Garlic",note:"1 head ¬∑ wet market",price:10},
+  {cat:"HOME &mdash; GRAINS & PANTRY",items:[
+    {n:"Jasmine rice",note:"500g &middot; any supermarket",price:25},
+    {n:"Rolled oats",note:"500g &middot; Tops / Lotus",price:65},
+    {n:"Garlic",note:"1 head &middot; wet market",price:10},
     {n:"Spring onion",note:"1 bunch",price:10},
     {n:"Fish sauce + oyster sauce",note:"small bottles, low sodium",price:25}
   ]},
-  {cat:"7-ELEVEN ‚Äî ORDER AT WORK",items:[
-    {n:"Grilled chicken rice box x3",note:"Grilled chicken rice box ¬∑ 59‡∏ø each ¬∑ every day",price:177},
-    {n:"Protein shake x1",note:"Farmhouse banana 340ml ¬∑ Day 2 only",price:49},
-    {n:"Granola bar x1",note:"Almond granola bar ¬∑ Day 3 only",price:20},
-    {n:"PH Plus water x3",note:"1000ml ¬∑ order with every lunch",price:90}
+  {cat:"7-ELEVEN &mdash; ORDER AT WORK",items:[
+    {n:"Grilled chicken rice box x3",note:"Grilled chicken rice box &middot; 59&#3647; each &middot; every day",price:177},
+    {n:"Protein shake x1",note:"Farmhouse banana 340ml &middot; Day 2 only",price:49},
+    {n:"Granola bar x1",note:"Almond granola bar &middot; Day 3 only",price:20},
+    {n:"PH Plus water x3",note:"1000ml &middot; order with every lunch",price:90}
   ]}
 ];
 
 var SCHED=[
-  {t:"8:00‚Äì8:30 am",h:"Wake up + breakfast",n:"Zero cooking. Eggs from fridge, soaked oats, fruit. Eat properly at home ‚Äî you have time with a 10am start.",dot:"pk"},
+  {t:"8:00&ndash;8:30 am",h:"Wake up + breakfast",n:"Zero cooking. Eggs from fridge, soaked oats, fruit. Eat properly at home &mdash; you have time with a 10am start.",dot:"pk"},
   {t:"9:30 am",h:"Leave for work",n:"You're not racing. Lunch will be delivered. Enjoy the slower morning.",dot:""},
   {t:"10:00 am",h:"Shift starts",n:"3 hours until your lunch break. Breakfast from 8:30am keeps you fuelled no problem.",dot:""},
-  {t:"1:00‚Äì2:00 pm",h:"Lunch ‚Äî 7-Eleven delivery",n:"Order on the app before your break starts. Grilled chicken rice box every day. Sit down, take the full break.",dot:"pk"},
-  {t:"5:00 pm",h:"Optional snack",n:"Only if genuinely hungry. 1 boiled egg or 1 small banana. Last 2 hours of shift ‚Äî don't arrive home starving.",dot:"am"},
-  {t:"7:00 pm",h:"Shift ends",n:"Head straight home. Don't stop to grab junk ‚Äî dinner is fast at home.",dot:""},
-  {t:"7:30 pm",h:"Home ‚Äî rest first",n:"Change, sit down, decompress 15‚Äì20 min before cooking. Don't stress-eat the second you walk in.",dot:"pk"},
-  {t:"8:00‚Äì8:30 pm",h:"Dinner",n:"Garlic chicken: 8 min. Steak: 6 min. Batch rice already in the fridge. Eat by 8:30pm comfortably.",dot:"pk"},
+  {t:"1:00&ndash;2:00 pm",h:"Lunch &mdash; 7-Eleven delivery",n:"Order on the app before your break starts. Grilled chicken rice box every day. Sit down, take the full break.",dot:"pk"},
+  {t:"5:00 pm",h:"Optional snack",n:"Only if genuinely hungry. 1 boiled egg or 1 small banana. Last 2 hours of shift &mdash; don't arrive home starving.",dot:"am"},
+  {t:"7:00 pm",h:"Shift ends",n:"Head straight home. Don't stop to grab junk &mdash; dinner is fast at home.",dot:""},
+  {t:"7:30 pm",h:"Home &mdash; rest first",n:"Change, sit down, decompress 15&ndash;20 min before cooking. Don't stress-eat the second you walk in.",dot:"pk"},
+  {t:"8:00&ndash;8:30 pm",h:"Dinner",n:"Garlic chicken: 8 min. Steak: 6 min. Batch rice already in the fridge. Eat by 8:30pm comfortably.",dot:"pk"},
   {t:"10:00 pm",h:"Kitchen closed",n:"If hungry after 10pm, drink a full glass of water and wait 10 min. Usually thirst.",dot:""},
-  {t:"Before sleep",h:"Set up tomorrow",n:"Boil 6‚Äì8 eggs. Pour oats in jar with water. Pack fruit. Tomorrow's breakfast is done.",dot:"pk"}
+  {t:"Before sleep",h:"Set up tomorrow",n:"Boil 6&ndash;8 eggs. Pour oats in jar with water. Pack fruit. Tomorrow's breakfast is done.",dot:"pk"}
 ];
 
 var RULES=[
-  {ti:"Prep eggs the night before ‚Äî always",b:"Boil 6‚Äì8 eggs on Sunday and Wednesday. This is the one habit that makes breakfast actually happen every day. No prep = no breakfast."},
-  {ti:"Lunch is always 7-Eleven ‚Äî and that's fine",b:"Grilled chicken rice box every single day. 35g protein, controlled fat, real food. One of the best convenience lunches available. Order on the app before your break."},
+  {ti:"Prep eggs the night before &mdash; always",b:"Boil 6&ndash;8 eggs on Sunday and Wednesday. This is the one habit that makes breakfast actually happen every day. No prep = no breakfast."},
+  {ti:"Lunch is always 7-Eleven &mdash; and that's fine",b:"Grilled chicken rice box every single day. 35g protein, controlled fat, real food. One of the best convenience lunches available. Order on the app before your break."},
   {ti:"Overnight oats = 90 seconds",b:"Jar + 40g oats + water in fridge. Morning: slice banana on top. Zero cooking. With a 10am start you can eat breakfast sitting down like a human being."},
   {ti:"Spread protein across 3 meals",b:"Muscles can only use about 40g protein per sitting. 3 meals = better muscle retention than 2 big dumps. This is exactly why adding breakfast matters."},
-  {ti:"Deficit is small on purpose",b:"About 300 kcal/day under your TDEE. Slow = muscle stays, fat goes. Nurses are on their feet all day ‚Äî too aggressive a cut destroys your shift energy."},
-  {ti:"Berries every single breakfast",b:"Raspberries + blueberries: low sugar, high fibre, anti-inflammatory. Skin and recovery benefits. Daily staple ‚Äî non-negotiable."},
+  {ti:"Deficit is small on purpose",b:"About 300 kcal/day under your TDEE. Slow = muscle stays, fat goes. Nurses are on their feet all day &mdash; too aggressive a cut destroys your shift energy."},
+  {ti:"Berries every single breakfast",b:"Raspberries + blueberries: low sugar, high fibre, anti-inflammatory. Skin and recovery benefits. Daily staple &mdash; non-negotiable."},
   {ti:"Big booty part of the protocol",b:"Add 15 min of glute work 3x/week: hip thrusts, squats, donkey kicks. No gym needed. Your diet is set up to fuel exactly this."},
-  {ti:"Expected results at 8 weeks",b:"2.5 to 4 kg fat lost. Waist visibly smaller. Glutes more defined. Rate: 0.3‚Äì0.5 kg fat per week. Slow, controlled, keeps your muscle."}
+  {ti:"Expected results at 8 weeks",b:"2.5 to 4 kg fat lost. Waist visibly smaller. Glutes more defined. Rate: 0.3&ndash;0.5 kg fat per week. Slow, controlled, keeps your muscle."}
 ];
 
 var S={day:0,chk:{},gdone:{}};
@@ -496,7 +496,7 @@ function nav(id){
   if(id==='meals')renderMeals();
 }
 
-/* ‚îÄ‚îÄ TODAY ‚îÄ‚îÄ */
+/* -- TODAY -- */
 var openD=null;
 function setDay(i){
   S.day=i;saveS();
@@ -515,7 +515,7 @@ function buildMeals(di){
     var mw=m.kcal,pp=Math.round(m.p*4/mw*100),cp=Math.round(m.c*4/mw*100),fp=Math.round(m.f*9/mw*100);
     var steps=m.recipe.map(function(r,si){return '<div class="rs"><div class="sn">'+(si+1)+'</div><div class="st"><span class="sh">'+r.s+'</span>'+r.t+'</div></div>';}).join('');
     h+='<div class="mout">'
-      +'<div class="mhdr"><span class="mty">'+m.ty.toUpperCase()+'</span><span class="mti">¬∑ '+m.ti+'</span></div>'
+      +'<div class="mhdr"><span class="mty">'+m.ty.toUpperCase()+'</span><span class="mti">&middot; '+m.ti+'</span></div>'
       +'<div class="mrow">'
         +'<div class="chk'+(done?' on':'')+'" id="ck'+k+'" onclick="doChk(\''+k+'\')">'+(done?CHK:'')+'</div>'
         +'<div class="minf" id="mi'+k+'" onclick="togD(\''+k+'\')" style="opacity:'+(done?.4:1)+'">'
@@ -569,7 +569,7 @@ function updateRing(){
   document.getElementById('rmsg').textContent=kc===0?'Tap meals to track \uD83D\uDCAA':kc>=T.kcal?'Target hit! \uD83C\uDFAF':(T.kcal-kc)+' kcal remaining';
 }
 
-/* ‚îÄ‚îÄ PLAN ‚îÄ‚îÄ */
+/* -- PLAN -- */
 var openD2=null;
 function buildPlan(){
   var h='';
@@ -582,7 +582,7 @@ function buildPlan(){
       var dk='p'+di+m.ty.replace(/\s/g,'');
       var steps=m.recipe.map(function(r,si){return '<div class="rs"><div class="sn">'+(si+1)+'</div><div class="st"><span class="sh">'+r.s+'</span>'+r.t+'</div></div>';}).join('');
       mr+='<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)">'
-        +'<div class="mhdr"><span class="mty">'+m.ty.toUpperCase()+'</span><span class="mti">¬∑ '+m.ti+'</span></div>'
+        +'<div class="mhdr"><span class="mty">'+m.ty.toUpperCase()+'</span><span class="mti">&middot; '+m.ti+'</span></div>'
         +'<div style="display:flex;justify-content:space-between;gap:10px">'
           +'<div style="flex:1;cursor:pointer" onclick="togD2(\''+dk+'\')">'
             +'<div class="mn" style="font-size:13px">'+m.name+bdg+'</div>'
@@ -616,7 +616,7 @@ function togD2(k){
   if(!o)setTimeout(function(){dr.scrollIntoView({behavior:'smooth',block:'nearest'});},60);
 }
 
-/* ‚îÄ‚îÄ GROCERY ‚îÄ‚îÄ */
+/* -- GROCERY -- */
 var GITEMS=[];
 function buildGroc(){
   GITEMS=[];GROC.forEach(function(g){g.items.forEach(function(it){GITEMS.push(it);});});
@@ -628,7 +628,7 @@ function buildGroc(){
       h+='<div class="gi'+(done?' dn':'')+'" id="gi'+i+'" onclick="togG('+i+')">'
         +'<div class="gcb'+(done?' on':'')+'" id="gcb'+i+'">'+(done?CHK:'')+'</div>'
         +'<div style="flex:1"><div class="gn">'+it.n+'</div><div class="gno">'+it.note+'</div></div>'
-        +'<div class="gp" id="gp'+i+'" style="color:'+(done?'#4ade80':'rgba(255,255,255,.5)')+'">‡∏ø'+it.price+'</div>'
+        +'<div class="gp" id="gp'+i+'" style="color:'+(done?'#4ade80':'rgba(255,255,255,.5)')+'">&#3647;'+it.price+'</div>'
       +'</div>';
     });
     h+='</div>';
@@ -650,7 +650,7 @@ function updGT(){
 }
 function resetGroc(){S.gdone={};saveS();buildGroc();}
 
-/* ‚îÄ‚îÄ SCHEDULE ‚îÄ‚îÄ */
+/* -- SCHEDULE -- */
 function buildSched(){
   var h='';
   SCHED.forEach(function(s){
@@ -659,7 +659,7 @@ function buildSched(){
   h+='<div class="sec" style="margin-top:24px">THE PROTOCOL RULES</div>';
   h+='<div class="rbanner"><div style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:8px">AT 8 WEEKS</div>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">'
-    +'<div><div class="rv">-2.5‚Äì4kg</div><div class="rl">fat lost</div></div>'
+    +'<div><div class="rv">-2.5&ndash;4kg</div><div class="rl">fat lost</div></div>'
     +'<div><div class="rv">Waist</div><div class="rl">smaller</div></div>'
     +'<div><div class="rv">Glutes</div><div class="rl">defined</div></div>'
     +'</div></div>';
@@ -669,7 +669,7 @@ function buildSched(){
   document.getElementById('schedwrap').innerHTML=h;
 }
 
-/* ‚îÄ‚îÄ CUSTOM MEALS ‚îÄ‚îÄ */
+/* -- CUSTOM MEALS -- */
 var customMeals=[];
 var editingMealId=null;
 var atdMealId=null;
@@ -680,7 +680,7 @@ function saveCustom(){localStorage.setItem('custom_meals',JSON.stringify(customM
 function renderMeals(){
   loadCustom();
   var wrap=document.getElementById('mealslist');
-  if(!customMeals.length){wrap.innerHTML='<div class="mm-empty">No custom meals yet.<br>Tap Ôºã to create your first.</div>';return;}
+  if(!customMeals.length){wrap.innerHTML='<div class="mm-empty">No custom meals yet.<br>Tap + to create your first.</div>';return;}
   var h='';
   customMeals.forEach(function(m){
     var mw=m.kcal||1,pp=Math.round((m.p||0)*4/mw*100),cp=Math.round((m.c||0)*4/mw*100),fp=Math.round((m.f||0)*9/mw*100);
@@ -688,16 +688,16 @@ function renderMeals(){
     h+='<div class="card" style="padding:13px 15px;margin-bottom:11px">'
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start">'
         +'<div style="flex:1"><div class="mn">'+esc(m.name)+'<span class="bdg '+srcCls+'">'+esc(m.src||'Home')+'</span></div>'
-          +'<div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:3px">'+esc(m.ty||'Meal')+' ¬∑ '+(m.kcal||0)+' kcal</div>'
+          +'<div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:3px">'+esc(m.ty||'Meal')+' &middot; '+(m.kcal||0)+' kcal</div>'
           +'<div class="mb"><div class="mp" style="width:'+pp+'%"></div><div class="mc" style="width:'+cp+'%"></div><div class="mf" style="width:'+fp+'%"></div></div>'
           +'<div class="ml"><div class="mli"><div class="md2" style="background:#4ade80"></div>P '+(m.p||0)+'g</div><div class="mli"><div class="md2" style="background:#60a5fa"></div>C '+(m.c||0)+'g</div><div class="mli"><div class="md2" style="background:#fbbf24"></div>F '+(m.f||0)+'g</div></div>'
         +'</div>'
         +'<div class="mkc"><div class="mkn">'+(m.kcal||0)+'</div><div class="mku">kcal</div></div>'
       +'</div>'
       +'<div class="mm-card-actions">'
-        +'<button class="btn-outline" onclick="openAtdModal(\''+m.id+'\')">Ôºã Add to Day</button>'
-        +'<button onclick="editMeal(\''+m.id+'\')" style="background:none;border:none;font-size:16px;cursor:pointer">‚úèÔ∏è</button>'
-        +'<button onclick="deleteMeal(\''+m.id+'\')" style="background:none;border:none;font-size:16px;cursor:pointer">üóë</button>'
+        +'<button class="btn-outline" onclick="openAtdModal(\''+m.id+'\')">+ Add to Day</button>'
+        +'<button onclick="editMeal(\''+m.id+'\')" style="background:none;border:none;font-size:16px;cursor:pointer">&#9999;</button>'
+        +'<button onclick="deleteMeal(\''+m.id+'\')" style="background:none;border:none;font-size:16px;cursor:pointer">&#128465;</button>'
       +'</div>'
     +'</div>';
   });
@@ -762,7 +762,7 @@ function addStepRow(label,text){
   var id='step'+stepCount;
   var wrap=document.getElementById('mm-steps');
   var div=document.createElement('div');div.className='step-row';div.id=id;
-  div.innerHTML='<input class="finp" style="width:80px" placeholder="PREP" value="'+esc(label||'')+'"><input class="finp" placeholder="Instruction" value="'+esc(text||'')+'"><button class="step-rm" onclick="document.getElementById(\''+id+'\').remove()">‚úï</button>';
+  div.innerHTML='<input class="finp" style="width:80px" placeholder="PREP" value="'+esc(label||'')+'"><input class="finp" placeholder="Instruction" value="'+esc(text||'')+'"><button class="step-rm" onclick="document.getElementById(\''+id+'\').remove()">&#10005;</button>';
   wrap.appendChild(div);
 }
 
@@ -831,7 +831,7 @@ function getCustomForDay(dayIdx){
   }).filter(Boolean);
 }
 
-/* ‚îÄ‚îÄ RECEIPT SCANNER ‚îÄ‚îÄ */
+/* -- RECEIPT SCANNER -- */
 var scanB64=null,scanMime=null;
 function initScan(){
   var key=localStorage.getItem('anthropic_key');
@@ -904,12 +904,12 @@ function showScanResults(items){
   lastScanItems=items;
   var h='<div class="card" style="padding:10px 14px"><div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.3);margin-bottom:8px">ITEMS FOUND</div>';
   items.forEach(function(it){
-    h+='<div class="scan-item"><span class="sn">'+esc(it.name)+'</span><span class="sp">‡∏ø'+Number(it.price).toFixed(0)+'</span></div>';
+    h+='<div class="scan-item"><span class="sn">'+esc(it.name)+'</span><span class="sp">&#3647;'+Number(it.price).toFixed(0)+'</span></div>';
   });
   var total=items.reduce(function(s,it){return s+Number(it.price);},0);
-  h+='<div style="display:flex;justify-content:space-between;padding-top:10px;margin-top:6px;border-top:1px solid rgba(255,255,255,.08)"><span style="font-weight:800">Total</span><span style="font-weight:800">‡∏ø'+total.toFixed(0)+'</span></div>';
+  h+='<div style="display:flex;justify-content:space-between;padding-top:10px;margin-top:6px;border-top:1px solid rgba(255,255,255,.08)"><span style="font-weight:800">Total</span><span style="font-weight:800">&#3647;'+total.toFixed(0)+'</span></div>';
   h+='<button class="btn-pink" style="width:100%;margin-top:12px" onclick="updateGrocPrices()">Update Grocery Prices</button>';
-  h+='<button class="btn-outline" style="width:100%;margin-top:8px" onclick="logScanToBudget()">üí∞ Log to Budget</button>';
+  h+='<button class="btn-outline" style="width:100%;margin-top:8px" onclick="logScanToBudget()">&#128176; Log to Budget</button>';
   h+='</div>';
   document.getElementById('scan-results').innerHTML=h;
   document.getElementById('scan-results').style.display='block';
@@ -935,10 +935,10 @@ function logScanToBudget(){
   entries.push({id:'be_'+Date.now(),date:new Date().toISOString(),amount:total,note:'Receipt scan ('+lastScanItems.length+' items)'});
   localStorage.setItem('budget_entries',JSON.stringify(entries));
   var res=document.getElementById('scan-results');
-  res.innerHTML+='<div style="text-align:center;padding:10px;color:#4ade80;font-size:12px;font-weight:700">‡∏ø'+total.toFixed(0)+' logged to budget</div>';
+  res.innerHTML+='<div style="text-align:center;padding:10px;color:#4ade80;font-size:12px;font-weight:700">&#3647;'+total.toFixed(0)+' logged to budget</div>';
 }
 
-/* ‚îÄ‚îÄ BUDGET TRACKER ‚îÄ‚îÄ */
+/* -- BUDGET TRACKER -- */
 var budYear,budMonth;
 function initBudget(){
   var now=new Date();
@@ -969,15 +969,15 @@ function renderBudget(){
   var biggest=filtered.reduce(function(mx,e){return e.amount>mx?e.amount:mx;},0);
 
   var sh='<div style="display:flex;justify-content:space-between;align-items:flex-start">'
-    +'<div><div style="font-size:28px;font-weight:800">‡∏ø'+total.toFixed(0)+'</div>'
+    +'<div><div style="font-size:28px;font-weight:800">&#3647;'+total.toFixed(0)+'</div>'
     +'<div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:2px">~$'+usd+' USD</div></div>'
-    +'<div style="text-align:right"><div style="font-size:11px;color:rgba(255,255,255,.3)">of ‡∏ø<span id="bud-target-val">'+target+'</span> budget</div>'
-    +'<button style="background:none;border:none;font-size:14px;cursor:pointer;margin-top:2px" onclick="editBudTarget()">‚úèÔ∏è</button></div></div>'
+    +'<div style="text-align:right"><div style="font-size:11px;color:rgba(255,255,255,.3)">of &#3647;<span id="bud-target-val">'+target+'</span> budget</div>'
+    +'<button style="background:none;border:none;font-size:14px;cursor:pointer;margin-top:2px" onclick="editBudTarget()">&#9999;</button></div></div>'
     +'<div class="bud-bar"><div class="bud-fill" style="width:'+Math.min(pct,100)+'%;background:'+barColor+'"></div></div>'
     +'<div style="font-size:10px;color:rgba(255,255,255,.25);text-align:right">'+pct.toFixed(0)+'% used</div>'
     +'<div class="bud-stats">'
-    +'<div class="bud-stat"><div class="v">‡∏ø'+avgWeek+'</div><div class="l">avg/week</div></div>'
-    +'<div class="bud-stat"><div class="v">‡∏ø'+biggest+'</div><div class="l">biggest</div></div>'
+    +'<div class="bud-stat"><div class="v">&#3647;'+avgWeek+'</div><div class="l">avg/week</div></div>'
+    +'<div class="bud-stat"><div class="v">&#3647;'+biggest+'</div><div class="l">biggest</div></div>'
     +'<div class="bud-stat"><div class="v">'+daysLeft+'</div><div class="l">days left</div></div>'
     +'</div>';
   document.getElementById('bud-summary').innerHTML=sh;
@@ -989,7 +989,7 @@ function renderBudget(){
     filtered.forEach(function(e){
       var d=new Date(e.date);
       var ds=d.getDate()+'/'+(d.getMonth()+1);
-      eh+='<div class="bud-entry"><span class="be-date">'+ds+'</span><span class="be-note">'+esc(e.note)+'</span><span class="be-amt">‡∏ø'+e.amount.toFixed(0)+'</span><button class="be-del" onclick="delBudEntry(\''+e.id+'\')">‚úï</button></div>';
+      eh+='<div class="bud-entry"><span class="be-date">'+ds+'</span><span class="be-note">'+esc(e.note)+'</span><span class="be-amt">&#3647;'+e.amount.toFixed(0)+'</span><button class="be-del" onclick="delBudEntry(\''+e.id+'\')">&#10005;</button></div>';
     });
   }
   document.getElementById('bud-entries').innerHTML=eh;
@@ -1018,7 +1018,7 @@ function editBudTarget(){
   var cur=parseInt(localStorage.getItem('budget_target'))||3000;
   var el=document.getElementById('bud-target-val');
   if(el.querySelector('input'))return;
-  el.innerHTML='<input class="finp" type="number" id="bud-target-inp" value="'+cur+'" style="width:70px;padding:4px 8px;font-size:12px;display:inline-block" inputmode="numeric"><button style="background:none;border:none;font-size:14px;cursor:pointer;vertical-align:middle" onclick="saveBudTarget()">‚úì</button>';
+  el.innerHTML='<input class="finp" type="number" id="bud-target-inp" value="'+cur+'" style="width:70px;padding:4px 8px;font-size:12px;display:inline-block" inputmode="numeric"><button style="background:none;border:none;font-size:14px;cursor:pointer;vertical-align:middle" onclick="saveBudTarget()">&#10003;</button>';
   var inp=document.getElementById('bud-target-inp');
   inp.focus();inp.select();
   inp.onkeydown=function(e){if(e.key==='Enter')saveBudTarget();};
@@ -1029,7 +1029,7 @@ function saveBudTarget(){
   renderBudget();
 }
 
-/* ‚îÄ‚îÄ PATCHED: buildMeals with custom meals ‚îÄ‚îÄ */
+/* -- PATCHED: buildMeals with custom meals -- */
 var _origBuildMeals=buildMeals;
 buildMeals=function(di){
   _origBuildMeals(di);
@@ -1043,7 +1043,7 @@ buildMeals=function(di){
     var mw=m.kcal||1,pp=Math.round(m.p*4/mw*100),cp=Math.round(m.c*4/mw*100),fp=Math.round(m.f*9/mw*100);
     var steps=m.recipe.map(function(r,si){return '<div class="rs"><div class="sn">'+(si+1)+'</div><div class="st"><span class="sh">'+esc(r.s)+'</span>'+esc(r.t)+'</div></div>';}).join('');
     h+='<div class="mout">'
-      +'<div class="mhdr"><span class="mty">'+m.ty.toUpperCase()+'</span><span class="mti">¬∑ '+esc(m.ti)+'</span></div>'
+      +'<div class="mhdr"><span class="mty">'+m.ty.toUpperCase()+'</span><span class="mti">&middot; '+esc(m.ti)+'</span></div>'
       +'<div class="mrow">'
         +'<div class="chk'+(done?' on':'')+'" id="ck'+k+'" onclick="doChk(\''+k+'\')">'+(done?CHK:'')+'</div>'
         +'<div class="minf" id="mi'+k+'" onclick="togD(\''+k+'\')" style="opacity:'+(done?.4:1)+'">'
@@ -1090,7 +1090,7 @@ updateRing=function(){
 };
 
 
-/* ‚îÄ‚îÄ INIT ‚îÄ‚îÄ */
+/* -- INIT -- */
 loadS();loadCustom();
 buildMeals(S.day);updateRing();
 buildGroc();initBudget();
@@ -1102,4 +1102,3 @@ if(S.day>0){
 </script>
 </body>
 </html>
-
