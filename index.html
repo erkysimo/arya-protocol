@@ -258,14 +258,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
       <button class="rbtn" onclick="resetGroc()">Reset grocery list</button>
     </div>
 
-    <!-- PLAN -->
-    <div class="pg" id="pg-plan">
-      <div class="sec">3-DAY MEAL PLAN</div>
-      <div id="planwrap"></div>
-      <div class="sec" style="margin-top:20px">DAILY SCHEDULE</div>
-      <div class="card" id="schedwrap" style="padding:14px 15px"></div>
-    </div>
-
     <!-- MY MEALS -->
     <div class="pg" id="pg-meals">
       <div class="mm-hdr">
@@ -273,24 +265,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
         <button class="btn-pink-sm" onclick="openMealModal()">Ôºã New Meal</button>
       </div>
       <div id="mealslist"></div>
-    </div>
-
-    <!-- SCAN -->
-    <div class="pg" id="pg-scan">
-      <div class="sec">AI RECEIPT SCANNER</div>
-      <div id="scan-key-setup"></div>
-      <div id="scan-main" style="display:none">
-        <div class="scan-zone" onclick="document.getElementById('scan-file').click()">
-          <div class="ic">üì∑</div>
-          <p>Tap to photograph a receipt</p>
-          <input type="file" id="scan-file" accept="image/*" capture="environment" style="display:none" onchange="scanFileChosen(this)">
-        </div>
-        <img id="scan-thumb" class="scan-preview" style="display:none">
-        <button class="btn-pink" id="scan-go" style="width:100%;margin-top:12px;display:none" onclick="doScan()">Scan Receipt</button>
-        <div id="scan-loading" style="display:none;text-align:center;padding:20px"><span class="spinner"></span>Reading receipt‚Ä¶</div>
-        <div id="scan-results" style="display:none"></div>
-        <button class="api-link" onclick="showApiSetup()" style="display:block;margin-top:18px;width:100%">Change API key</button>
-      </div>
     </div>
 
     <!-- BUDGET -->
@@ -390,9 +364,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
   <div id="botnav">
     <button class="ni on" id="ni-today" onclick="nav('today')"><span class="ni-ic">üìã</span><span class="ni-lb">TRACK</span></button>
     <button class="ni" id="ni-meals" onclick="nav('meals')"><span class="ni-ic">üçΩ</span><span class="ni-lb">MEALS</span></button>
-    <button class="ni" id="ni-plan" onclick="nav('plan')"><span class="ni-ic">üìÖ</span><span class="ni-lb">PLAN</span></button>
     <button class="ni" id="ni-grocery" onclick="nav('grocery')"><span class="ni-ic">üõí</span><span class="ni-lb">GROCERY</span></button>
-    <button class="ni" id="ni-scan" onclick="nav('scan')"><span class="ni-ic">üì∑</span><span class="ni-lb">SCAN</span></button>
     <button class="ni" id="ni-budget" onclick="nav('budget')"><span class="ni-ic">üí∞</span><span class="ni-lb">BUDGET</span></button>
   </div>
 
@@ -408,12 +380,12 @@ var DAYS=[
       {s:"Morning ‚Äî 2 min",t:"Peel 2 cold eggs. Grab 1 small banana and 50g blueberries. You have time with a 10am start ‚Äî eat sitting down properly."},
       {s:"Done",t:"Eat by 8:30am, leave for work at 9:30am. <b>No cooking, no rush.</b>"}
     ]},
-    {ty:"Lunch",ti:"1:00‚Äì2:00 pm",name:"Grilled chicken rice box + PH water",desc:"‡∏Ç‡πâ‡∏≤‡∏ß‡∏´‡∏≠‡∏°‡∏°‡∏±‡∏ô‡∏õ‡∏π‡∏≠‡∏Å‡πÑ‡∏Å‡πà‡∏¢‡πà‡∏≤‡∏á‡∏à‡∏¥‡πâ‡∏°‡πÅ‡∏à‡πà‡∏ß 59‡∏ø ¬∑ PH Plus water 30‡∏ø ‚Äî order via 7-Eleven app",kcal:420,p:35,c:52,f:8,src:"7-eleven",recipe:[
-      {s:"Order this",t:"<b>‡∏Ç‡πâ‡∏≤‡∏ß‡∏´‡∏≠‡∏°‡∏°‡∏±‡∏ô‡∏õ‡∏π‡∏≠‡∏Å‡πÑ‡∏Å‡πà‡∏¢‡πà‡∏≤‡∏á‡∏à‡∏¥‡πâ‡∏°‡πÅ‡∏à‡πà‡∏ß</b> ‚Äî grilled chicken breast rice box, 59‡∏ø. Best macro item on the 7-Eleven menu for your goals."},
-      {s:"The sauce",t:"The dipping sauce (‡∏à‡∏¥‡πâ‡∏°‡πÅ‡∏à‡πà‡∏ß) is mostly tamarind and sugar. <b>Use half or skip it</b> ‚Äî saves 40‚Äì60 kcal you don't need."},
+    {ty:"Lunch",ti:"1:00‚Äì2:00 pm",name:"Grilled chicken rice box + PH water",desc:"Grilled chicken breast rice box 59‡∏ø ¬∑ PH Plus water 30‡∏ø ‚Äî order via 7-Eleven app",kcal:420,p:35,c:52,f:8,src:"7-eleven",recipe:[
+      {s:"Order this",t:"<b>Grilled chicken breast rice box</b> ‚Äî 59‡∏ø. Best macro item on the 7-Eleven menu for your goals."},
+      {s:"The sauce",t:"The dipping sauce is mostly tamarind and sugar. <b>Use half or skip it</b> ‚Äî saves 40‚Äì60 kcal you don't need."},
       {s:"Order tip",t:"Order ahead on the app before your break so it arrives on time. Add PH Plus water (30‡∏ø). <b>Sit down and actually take your break.</b>"}
     ]},
-    {ty:"Dinner",ti:"8:00‚Äì8:30 pm",name:"Garlic chicken rice ‚Äî ‡πÑ‡∏Å‡πà‡∏ó‡∏≠‡∏î‡∏Å‡∏£‡∏∞‡πÄ‡∏ó‡∏µ‡∏¢‡∏°",desc:"150g chicken breast ¬∑ 70g jasmine rice ¬∑ garlic ¬∑ spring onion",kcal:480,p:52,c:36,f:8,src:"home",recipe:[
+    {ty:"Dinner",ti:"8:00‚Äì8:30 pm",name:"Garlic chicken rice",desc:"150g chicken breast ¬∑ 70g jasmine rice ¬∑ garlic ¬∑ spring onion",kcal:480,p:52,c:36,f:8,src:"home",recipe:[
       {s:"Home at 7:30 ‚Äî rest first",t:"Change clothes, sit for 15‚Äì20 min. <b>Don't cook the second you walk in.</b> You just did a 9-hour shift."},
       {s:"Batch rice once",t:"Cook 300g dry rice at once. Portion into 70g servings. Lasts 3 days ‚Äî just reheat tonight's portion."},
       {s:"Marinate",t:"Slice 150g chicken breast thin. Mix with <b>4‚Äì5 crushed garlic cloves</b>, pinch of white pepper, 1 tsp fish sauce. Rest 10 min."},
@@ -445,13 +417,13 @@ var DAYS=[
       {s:"Why this works",t:"High fat + protein keeps you full <b>all the way to your 1pm break</b> ‚Äî 4.5 hours no problem."},
       {s:"Relax",t:"10am start ‚Äî eat at home, sit down. <b>No rushing out the door.</b>"}
     ]},
-    {ty:"Lunch",ti:"1:00‚Äì2:00 pm",name:"Grilled chicken rice box + granola bar",desc:"‡∏Ç‡πâ‡∏≤‡∏ß‡∏´‡∏≠‡∏°‡∏°‡∏±‡∏ô‡∏õ‡∏π‡∏≠‡∏Å‡πÑ‡∏Å‡πà‡∏¢‡πà‡∏≤‡∏á 59‡∏ø + ‡πÄ‡∏Å‡∏£‡∏ô‡πÄ‡∏ô‡πà‡∏¢‡πå‡∏ö‡∏≤‡∏£‡πå‡∏≠‡∏±‡∏•‡∏°‡∏≠‡∏ô‡∏î‡πå 20‡∏ø ‚Äî 7-Eleven delivery",kcal:450,p:37,c:60,f:10,src:"7-eleven",recipe:[
-      {s:"Order this combo",t:"Grilled chicken rice box (59‡∏ø) + 1 granola bar almond choc (‡πÄ‡∏Å‡∏£‡∏ô‡πÄ‡∏ô‡πà‡∏¢‡πå‡∏ö‡∏≤‡∏£‡πå‡∏ä‡∏¥‡∏û‡∏≠‡∏±‡∏•‡∏°‡∏≠‡∏ô‡∏î‡πå, 20‡∏ø). Total 79‡∏ø."},
+    {ty:"Lunch",ti:"1:00‚Äì2:00 pm",name:"Grilled chicken rice box + granola bar",desc:"Grilled chicken rice box 59‡∏ø + Almond granola bar 20‡∏ø ‚Äî 7-Eleven delivery",kcal:450,p:37,c:60,f:10,src:"7-eleven",recipe:[
+      {s:"Order this combo",t:"Grilled chicken rice box (59‡∏ø) + 1 granola bar almond choc (20‡∏ø). Total 79‡∏ø."},
       {s:"The granola bar",t:"About 100 kcal, mostly oats and almonds. <b>Eat it after the rice box</b> ‚Äî it's a finisher. Max 1 per day."},
       {s:"Why today",t:"Day 3 breakfast was low-carb (eggs + avocado). The granola bar bumps carbs up to keep <b>energy good for the last stretch of shift.</b>"}
     ]},
     {ty:"Dinner",ti:"8:00‚Äì8:30 pm",name:"Garlic chicken + rice + banana",desc:"150g chicken breast ¬∑ 60g jasmine rice ¬∑ garlic ¬∑ 1 small banana",kcal:470,p:50,c:50,f:8,src:"home",recipe:[
-      {s:"Same garlic chicken",t:"Cook ‡πÑ‡∏Å‡πà‡∏ó‡∏≠‡∏î‡∏Å‡∏£‡∏∞‡πÄ‡∏ó‡∏µ‡∏¢‡∏° exactly as Day 1. 8 minutes. You know this by now."},
+      {s:"Same garlic chicken",t:"Cook garlic chicken exactly as Day 1. 8 minutes. You know this by now."},
       {s:"The banana",t:"Eat the banana <b>after dinner</b> ‚Äî it's your treat. 7pm finish, long shift, you earned it."},
       {s:"End of cycle",t:"Day 3 done. Tonight: <b>boil 6‚Äì8 eggs, soak oats in a jar, check grocery list.</b> Reset and repeat."}
     ]}
@@ -478,9 +450,9 @@ var GROC=[
     {n:"Fish sauce + oyster sauce",note:"small bottles, low sodium",price:25}
   ]},
   {cat:"7-ELEVEN ‚Äî ORDER AT WORK",items:[
-    {n:"Grilled chicken rice box x3",note:"‡∏Ç‡πâ‡∏≤‡∏ß‡∏´‡∏≠‡∏°‡∏°‡∏±‡∏ô‡∏õ‡∏π‡∏≠‡∏Å‡πÑ‡∏Å‡πà‡∏¢‡πà‡∏≤‡∏á ¬∑ 59‡∏ø each ¬∑ every day",price:177},
+    {n:"Grilled chicken rice box x3",note:"Grilled chicken rice box ¬∑ 59‡∏ø each ¬∑ every day",price:177},
     {n:"Protein shake x1",note:"Farmhouse banana 340ml ¬∑ Day 2 only",price:49},
-    {n:"Granola bar x1",note:"‡πÄ‡∏Å‡∏£‡∏ô‡πÄ‡∏ô‡πà‡∏¢‡πå‡∏ö‡∏≤‡∏£‡πå‡∏≠‡∏±‡∏•‡∏°‡∏≠‡∏ô‡∏î‡πå ¬∑ Day 3 only",price:20},
+    {n:"Granola bar x1",note:"Almond granola bar ¬∑ Day 3 only",price:20},
     {n:"PH Plus water x3",note:"1000ml ¬∑ order with every lunch",price:90}
   ]}
 ];
@@ -513,7 +485,7 @@ var S={day:0,chk:{},gdone:{}};
 function loadS(){try{var r=JSON.parse(localStorage.getItem('arya4')||'{}');if(r.chk)S.chk=r.chk;if(r.gdone)S.gdone=r.gdone;if(r.day)S.day=r.day;}catch(e){}}
 function saveS(){try{localStorage.setItem('arya4',JSON.stringify(S));}catch(e){}}
 
-var TABS=['today','meals','plan','grocery','scan','budget'];
+var TABS=['today','meals','grocery','budget'];
 function nav(id){
   TABS.forEach(function(p){
     document.getElementById('pg-'+p).classList.toggle('on',p===id);
@@ -522,8 +494,6 @@ function nav(id){
   document.getElementById('scroll').scrollTop=0;
   if(id==='budget')renderBudget();
   if(id==='meals')renderMeals();
-  if(id==='plan'){buildPlan();buildSched();}
-  if(id==='scan')initScan();
 }
 
 /* ‚îÄ‚îÄ TODAY ‚îÄ‚îÄ */
