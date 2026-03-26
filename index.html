@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Arya's Protocol</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+html,body{height:100%;background:#0c0c0e;overflow:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-size:14px;color:#fff;-webkit-font-smoothing:antialiased}
+#wrap{display:flex;flex-direction:column;height:100%;max-width:430px;margin:0 auto;background:#0c0c0e}
+#topbar{flex-shrink:0;background:#0c0c0e;padding:52px 16px 12px;border-bottom:1px solid rgba(255,255,255,.07)}
+#scroll{flex:1;overflow-y:scroll;-webkit-overflow-scrolling:touch;padding:0 16px 24px}
+#botnav{flex-shrink:0;background:#111113;border-top:1px solid rgba(255,255,255,.09);display:flex;padding-bottom:env(safe-area-inset-bottom,0px)}
+
+/* brand */
+.eye{font-size:9px;letter-spacing:.16em;color:rgba(255,255,255,.25);font-weight:700;margin-bottom:2px}
+.bname{font-size:19px;font-weight:800;line-height:1.2;letter-spacing:-.3px}
+.bname em{color:#f472b6;font-style:normal}
+.bsub{font-size:11px;color:rgba(255,255,255,.25);margin-top:5px}
+
+/* nav */
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 2px 8px;background:none;border:none;cursor:pointer}
+.ni-ic{font-size:19px;line-height:1}
+.ni-lb{font-size:9px;font-weight:700;letter-spacing:.05em;color:rgba(255,255,255,.28)}
+.ni.on .ni-lb{color:#f472b6}
+
+/* pages */
+.pg{display:none;padding-top:14px}
+.pg.on{display:block}
+
+/* shared */
+.sec{font-size:10px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.25);margin:18px 0 8px}
+.card{background:rgba(255,255,255,.055);border-radius:18px;padding:15px;margin-bottom:11px}
+
+/* day tabs */
+.dtabs{display:flex;gap:8px;margin-bottom:13px}
+.dtab{flex:1;padding:9px 0;border-radius:11px;border:none;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.07);color:rgba(255,255,255,.38);border-bottom:2px solid transparent;transition:all .18s}
+.dtab.on{background:rgba(244,114,182,.13);color:#f472b6;border-bottom-color:#f472b6}
+#dlabel{font-size:11px;color:rgba(255,255,255,.3);margin-bottom:11px}
+
+/* ring */
+.ring-row{display:flex;align-items:center;gap:14px}
+.rw{position:relative;width:72px;height:72px;flex-shrink:0}
+.rw svg{position:absolute;top:0;left:0}
+.ri{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.rn{font-size:17px;font-weight:800}
+.ru{font-size:9px;color:rgba(255,255,255,.3)}
+.rmsg{font-size:13px;font-weight:600;margin-bottom:8px;line-height:1.35}
+.brow{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.blbl{font-size:11px;font-weight:600;width:50px;flex-shrink:0}
+.btrk{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.09);overflow:hidden}
+.bfil{height:100%;border-radius:3px;transition:width .4s}
+.bval{font-size:10px;color:rgba(255,255,255,.3);width:48px;text-align:right;flex-shrink:0}
+
+/* meals */
+.mout{border-bottom:1px solid rgba(255,255,255,.06)}
+.mout:last-child{border-bottom:none}
+.mhdr{display:flex;align-items:center;gap:6px;padding-top:12px;margin-bottom:2px}
+.mty{font-size:10px;font-weight:700;letter-spacing:.07em;color:rgba(255,255,255,.26)}
+.mti{font-size:10px;color:rgba(255,255,255,.18)}
+.mrow{display:flex;align-items:flex-start;gap:11px;padding:9px 0 7px}
+.chk{width:23px;height:23px;border-radius:7px;border:1.5px solid rgba(255,255,255,.2);background:transparent;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s}
+.chk.on{background:#4ade80;border-color:#4ade80}
+.minf{flex:1;min-width:0;cursor:pointer}
+.mn{font-size:13px;font-weight:700;line-height:1.3;color:#fff}
+.md{font-size:11px;color:rgba(255,255,255,.35);margin-top:3px;line-height:1.5}
+.mhnt{font-size:10px;color:rgba(244,114,182,.6);margin-top:5px;font-weight:700}
+.mkc{text-align:right;flex-shrink:0}
+.mkn{font-size:15px;font-weight:800}
+.mku{font-size:9px;color:rgba(255,255,255,.26)}
+
+/* badge */
+.bdg{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700;display:inline-block;margin-left:4px;vertical-align:middle}
+.bh{background:rgba(74,222,128,.14);color:#4ade80}
+.b7{background:rgba(251,146,60,.14);color:#fb923c}
+
+/* recipe drawer */
+.drw{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
+.drw.open{max-height:1200px}
+.rin{background:rgba(244,114,182,.06);border:1px solid rgba(244,114,182,.13);border-radius:13px;padding:13px;margin-bottom:8px}
+.rtl{font-size:10px;font-weight:700;letter-spacing:.08em;color:#f472b6;margin-bottom:10px}
+.rs{display:flex;gap:9px;margin-bottom:10px}
+.rs:last-child{margin-bottom:0}
+.sn{width:22px;height:22px;border-radius:50%;background:rgba(244,114,182,.15);color:#f472b6;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.st{font-size:12px;color:rgba(255,255,255,.56);line-height:1.6}
+.st b{color:rgba(255,255,255,.9);font-weight:700}
+.sh{font-size:10px;font-weight:700;color:rgba(255,255,255,.26);letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:3px}
+
+/* macro mini bar */
+.mb{height:5px;border-radius:3px;overflow:hidden;display:flex;gap:2px;background:rgba(255,255,255,.07);margin-top:8px}
+.mp{background:#4ade80;border-radius:3px}
+.mc{background:#60a5fa;border-radius:3px}
+.mf{background:#fbbf24;border-radius:3px}
+.ml{display:flex;gap:10px;margin-top:5px;flex-wrap:wrap}
+.mli{display:flex;align-items:center;gap:4px;font-size:10px;color:rgba(255,255,255,.34)}
+.md2{width:7px;height:7px;border-radius:2px;flex-shrink:0}
+
+/* day total */
+.dtot{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:rgba(244,114,182,.07);border-radius:11px;margin-top:10px;flex-wrap:wrap;gap:5px}
+.dtvs{display:flex;gap:10px;flex-wrap:wrap}
+.dtv{font-size:12px;font-weight:700}
+
+/* grocery */
+.gi{display:flex;align-items:center;gap:11px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:opacity .18s}
+.gi:last-child{border-bottom:none}
+.gi.dn{opacity:.3}
+.gcb{width:20px;height:20px;border-radius:6px;border:1.5px solid rgba(255,255,255,.18);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.gcb.on{background:#4ade80;border-color:#4ade80}
+.gn{font-size:13px;font-weight:500}
+.gno{font-size:11px;color:rgba(255,255,255,.3);margin-top:2px}
+.gp{font-size:13px;font-weight:800;flex-shrink:0;margin-left:auto;padding-left:8px}
+
+/* schedule */
+.tli{position:relative;padding-left:22px;margin-bottom:20px}
+.tli:last-child{margin-bottom:0}
+.tdot{position:absolute;left:2px;top:4px;width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.18);background:transparent}
+.tdot.pk{border-color:#f472b6;background:rgba(244,114,182,.14)}
+.tdot.am{border-color:#fbbf24;background:rgba(251,191,36,.1)}
+.tt{font-size:10px;font-weight:700;letter-spacing:.04em;color:rgba(255,255,255,.26);margin-bottom:2px}
+.tt.pk{color:#f472b6}
+.tt.am{color:#fbbf24}
+.th{font-size:14px;font-weight:800;margin-bottom:4px}
+.tn{font-size:12px;color:rgba(255,255,255,.36);line-height:1.6}
+
+/* rules */
+.rc{background:rgba(255,255,255,.04);border-radius:15px;padding:14px;margin-bottom:9px;border-left:3px solid rgba(244,114,182,.4)}
+.rct{font-size:13px;font-weight:800;margin-bottom:4px}
+.rcb{font-size:12px;color:rgba(255,255,255,.4);line-height:1.65}
+.rbanner{background:rgba(244,114,182,.09);border:1px solid rgba(244,114,182,.14);border-radius:16px;padding:15px;margin-bottom:13px}
+.rv{font-size:16px;font-weight:800;color:#f472b6}
+.rl{font-size:10px;color:rgba(255,255,255,.34);margin-top:2px}
+
+/* reset */
+.rbtn{width:100%;padding:13px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.3);font-size:12px;cursor:pointer;font-family:inherit;margin-top:6px}
+
+/* ‚îÄ‚îÄ My Meals ‚îÄ‚îÄ */
+.mm-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.mm-hdr h2{font-size:19px;font-weight:800}
+.btn-pink{background:#f472b6;color:#0c0c0e;border:none;border-radius:12px;padding:10px 18px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit}
+.btn-pink-sm{background:#f472b6;color:#0c0c0e;border:none;border-radius:10px;padding:7px 13px;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit}
+.btn-outline{background:transparent;border:1px solid rgba(244,114,182,.4);color:#f472b6;border-radius:10px;padding:7px 13px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
+.mm-empty{text-align:center;padding:40px 20px;color:rgba(255,255,255,.25);font-size:13px;line-height:1.7}
+.mm-card-actions{display:flex;gap:6px;margin-top:8px}
+.mm-card-actions button{background:none;border:none;font-size:16px;cursor:pointer;padding:4px}
+.bdg.bc{background:rgba(244,114,182,.14);color:#f472b6}
+
+/* modal */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:none;align-items:flex-end;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{width:100%;max-width:430px;max-height:92vh;background:#18181b;border-radius:22px 22px 0 0;padding:20px 18px env(safe-area-inset-bottom,16px);overflow-y:auto;-webkit-overflow-scrolling:touch;animation:slideUp .3s ease}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal h3{font-size:17px;font-weight:800;margin-bottom:16px}
+.flbl{font-size:10px;font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.3);margin-bottom:5px;margin-top:12px}
+.finp{width:100%;padding:11px 13px;border-radius:11px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;font-size:14px;font-family:inherit;outline:none}
+.finp:focus{border-color:rgba(244,114,182,.5)}
+.fta{resize:vertical;min-height:60px}
+.finp-row{display:flex;gap:8px}
+.finp-row .finp{flex:1}
+.pill-row{display:flex;gap:6px;flex-wrap:wrap}
+.pill{padding:8px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s}
+.pill.on{background:rgba(244,114,182,.15);color:#f472b6;border-color:rgba(244,114,182,.4)}
+.step-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px}
+.step-row .finp{flex:1}
+.step-rm{background:none;border:none;color:rgba(255,255,255,.2);font-size:18px;cursor:pointer;padding:8px 4px}
+
+/* add-to-day picker */
+.atd-pick{background:rgba(255,255,255,.06);border-radius:13px;padding:12px;margin-top:8px;display:none}
+.atd-pick.open{display:block}
+
+/* ‚îÄ‚îÄ Scan ‚îÄ‚îÄ */
+.scan-zone{border:2px dashed rgba(255,255,255,.12);border-radius:18px;padding:40px 20px;text-align:center;cursor:pointer;transition:border-color .2s}
+.scan-zone:active{border-color:rgba(244,114,182,.4)}
+.scan-zone .ic{font-size:42px;margin-bottom:10px}
+.scan-zone p{color:rgba(255,255,255,.3);font-size:13px}
+.scan-preview{max-width:100%;border-radius:12px;margin:12px 0}
+.scan-item{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.scan-item:last-child{border-bottom:none}
+.scan-item .sn{font-size:13px}
+.scan-item .sp{font-size:14px;font-weight:800;flex-shrink:0}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(244,114,182,.2);border-top-color:#f472b6;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.api-card{background:rgba(244,114,182,.06);border:1px solid rgba(244,114,182,.13);border-radius:14px;padding:16px;text-align:center}
+.api-card p{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:10px;line-height:1.6}
+.api-link{font-size:11px;color:rgba(255,255,255,.2);cursor:pointer;margin-top:14px;background:none;border:none;font-family:inherit}
+
+/* ‚îÄ‚îÄ Budget ‚îÄ‚îÄ */
+.bud-month{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:14px}
+.bud-month button{background:none;border:none;color:rgba(255,255,255,.3);font-size:20px;cursor:pointer;padding:4px 8px}
+.bud-month span{font-size:15px;font-weight:800;min-width:140px;text-align:center}
+.bud-bar{height:8px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden;margin:10px 0}
+.bud-fill{height:100%;border-radius:4px;background:#f472b6;transition:width .4s}
+.bud-stats{display:flex;gap:8px;margin-top:10px}
+.bud-stat{flex:1;text-align:center;background:rgba(255,255,255,.04);border-radius:10px;padding:8px 4px}
+.bud-stat .v{font-size:14px;font-weight:800}
+.bud-stat .l{font-size:9px;color:rgba(255,255,255,.26);margin-top:2px}
+.bud-quick{overflow:hidden;max-height:0;transition:max-height .3s ease}
+.bud-quick.open{max-height:200px}
+.bud-entry{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.bud-entry:last-child{border-bottom:none}
+.bud-entry .be-date{font-size:10px;color:rgba(255,255,255,.2);flex-shrink:0}
+.bud-entry .be-note{font-size:13px;flex:1;margin:0 10px}
+.bud-entry .be-amt{font-size:14px;font-weight:800;flex-shrink:0}
+.bud-entry .be-del{background:none;border:none;color:rgba(255,255,255,.15);font-size:14px;cursor:pointer;padding:4px 6px;margin-left:6px}
+</style>
+</head>
+<body>
+<div id="wrap">
+
+  <div id="topbar">
+    <div class="eye">ARYA'S</div>
+    <div class="bname">Big Booty Small Waist<br><em>Bad Bitch Protocol</em></div>
+    <div class="bsub">56 kg ¬∑ 158 cm ¬∑ Nurse 10am‚Äì7pm ¬∑ Bangkok ¬∑ Shred mode üî•</div>
+  </div>
+
+  <div id="scroll">
+
+    <!-- TODAY -->
+    <div class="pg on" id="pg-today">
+      <div class="dtabs">
+        <button class="dtab on" id="dt0" onclick="setDay(0)">Day 1</button>
+        <button class="dtab" id="dt1" onclick="setDay(1)">Day 2</button>
+        <button class="dtab" id="dt2" onclick="setDay(2)">Day 3</button>
+      </div>
+      <div id="dlabel">Rotate breakfast ¬∑ 7-Eleven lunch ¬∑ home dinner</div>
+      <div class="card">
+        <div class="ring-row">
+          <div class="rw">
+            <svg width="72" height="72" viewBox="0 0 72 72">
+              <circle cx="36" cy="36" r="28" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="6"/>
+              <circle id="rarc" cx="36" cy="36" r="28" fill="none" stroke="#f472b6" stroke-width="6" stroke-dasharray="0 175.93" stroke-linecap="round" style="transform:rotate(-90deg);transform-origin:36px 36px;transition:stroke-dasharray .5s ease"/>
+            </svg>
+            <div class="ri"><div class="rn" id="rnum">0</div><div class="ru">kcal</div></div>
+          </div>
+          <div style="flex:1">
+            <div class="rmsg" id="rmsg">Tap meals to track üí™</div>
+            <div class="brow"><div class="blbl" style="color:#4ade80">Protein</div><div class="btrk"><div class="bfil" id="bp" style="background:#4ade80;width:0%"></div></div><div class="bval" id="vp">0/120g</div></div>
+            <div class="brow"><div class="blbl" style="color:#60a5fa">Carbs</div><div class="btrk"><div class="bfil" id="bc" style="background:#60a5fa;width:0%"></div></div><div class="bval" id="vc">0/115g</div></div>
+            <div class="brow" style="margin-bottom:0"><div class="blbl" style="color:#fbbf24">Fat</div><div class="btrk"><div class="bfil" id="bf" style="background:#fbbf24;width:0%"></div></div><div class="bval" id="vf">0/42g</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="mcard" style="padding:4px 14px 12px"></div>
+    </div>
+
+    <!-- GROCERY -->
+    <div class="pg" id="pg-grocery">
+      <div class="sec">GROCERY LIST ‚Äî 3 DAYS</div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between">
+          <div><div style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:3px">3-day total</div><div style="font-size:24px;font-weight:800">‡∏ø840</div><div style="font-size:10px;color:rgba(255,255,255,.26);margin-top:2px">incl. 7-Eleven delivery</div></div>
+          <div style="text-align:right"><div style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:3px">in cart</div><div style="font-size:24px;font-weight:800;color:#4ade80">‡∏ø<span id="gcart">0</span></div><div style="font-size:10px;color:rgba(255,255,255,.26);margin-top:2px"><span id="gcnt">0</span> items</div></div>
+        </div>
+      </div>
+      <div id="grocwrap"></div>
+      <button class="rbtn" onclick="resetGroc()">Reset grocery list</button>
+    </div>
+
+    <!-- PLAN -->
+    <div class="pg" id="pg-plan">
+      <div class="sec">3-DAY MEAL PLAN</div>
+      <div id="planwrap"></div>
+      <div class="sec" style="margin-top:20px">DAILY SCHEDULE</div>
+      <div class="card" id="schedwrap" style="padding:14px 15px"></div>
+    </div>
+
+    <!-- MY MEALS -->
+    <div class="pg" id="pg-meals">
+      <div class="mm-hdr">
+        <h2>My Meals</h2>
+        <button class="btn-pink-sm" onclick="openMealModal()">Ôºã New Meal</button>
+      </div>
+      <div id="mealslist"></div>
+    </div>
+
+    <!-- SCAN -->
+    <div class="pg" id="pg-scan">
+      <div class="sec">AI RECEIPT SCANNER</div>
+      <div id="scan-key-setup"></div>
+      <div id="scan-main" style="display:none">
+        <div class="scan-zone" onclick="document.getElementById('scan-file').click()">
+          <div class="ic">üì∑</div>
+          <p>Tap to photograph a receipt</p>
+          <input type="file" id="scan-file" accept="image/*" capture="environment" style="display:none" onchange="scanFileChosen(this)">
+        </div>
+        <img id="scan-thumb" class="scan-preview" style="display:none">
+        <button class="btn-pink" id="scan-go" style="width:100%;margin-top:12px;display:none" onclick="doScan()">Scan Receipt</button>
+        <div id="scan-loading" style="display:none;text-align:center;padding:20px"><span class="spinner"></span>Reading receipt‚Ä¶</div>
+        <div id="scan-results" style="display:none"></div>
+        <button class="api-link" onclick="showApiSetup()" style="display:block;margin-top:18px;width:100%">Change API key</button>
+      </div>
+    </div>
+
+    <!-- BUDGET -->
+    <div class="pg" id="pg-budget">
+      <div class="bud-month">
+        <button onclick="budNav(-1)">‚Üê</button>
+        <span id="bud-month-label"></span>
+        <button onclick="budNav(1)">‚Üí</button>
+      </div>
+      <div class="card" id="bud-summary"></div>
+      <div style="margin-top:12px">
+        <button class="btn-outline" style="width:100%" onclick="togBudQuick()">Ôºã Add Purchase</button>
+        <div class="bud-quick" id="bud-quick">
+          <div style="padding:12px 0">
+            <div class="finp-row" style="margin-bottom:8px">
+              <input class="finp" type="number" id="bud-amt" placeholder="‡∏ø Amount" inputmode="decimal">
+              <input class="finp" type="text" id="bud-note" placeholder="Note (e.g. 7-Eleven lunch)">
+            </div>
+            <button class="btn-pink" style="width:100%" onclick="addBudEntry()">Save</button>
+          </div>
+        </div>
+      </div>
+      <div class="sec">PURCHASES</div>
+      <div class="card" id="bud-entries" style="padding:4px 14px"></div>
+    </div>
+
+  </div><!-- /scroll -->
+
+  <!-- Meal Modal -->
+  <div class="modal-bg" id="meal-modal">
+    <div class="modal">
+      <h3 id="meal-modal-title">New Meal</h3>
+      <div class="flbl">MEAL NAME</div>
+      <input class="finp" id="mm-name" placeholder="e.g. Garlic Chicken Bowl">
+      <div class="flbl">MEAL TYPE</div>
+      <div class="pill-row" id="mm-type">
+        <button class="pill on" onclick="pickPill(this,'mm-type')">Breakfast</button>
+        <button class="pill" onclick="pickPill(this,'mm-type')">Lunch</button>
+        <button class="pill" onclick="pickPill(this,'mm-type')">Dinner</button>
+        <button class="pill" onclick="pickPill(this,'mm-type')">Snack</button>
+      </div>
+      <div class="flbl">TIME</div>
+      <input class="finp" id="mm-time" placeholder="e.g. 8:00 AM">
+      <div class="flbl">DESCRIPTION</div>
+      <textarea class="finp fta" id="mm-desc" placeholder="Short description"></textarea>
+      <div class="flbl">CALORIES</div>
+      <input class="finp" id="mm-kcal" type="number" placeholder="kcal" inputmode="numeric">
+      <div class="flbl">MACROS</div>
+      <div class="finp-row">
+        <input class="finp" id="mm-p" type="number" placeholder="Protein g" inputmode="numeric">
+        <input class="finp" id="mm-c" type="number" placeholder="Carbs g" inputmode="numeric">
+        <input class="finp" id="mm-f" type="number" placeholder="Fat g" inputmode="numeric">
+      </div>
+      <div class="flbl">SOURCE</div>
+      <div class="pill-row" id="mm-src">
+        <button class="pill on" onclick="pickPill(this,'mm-src')">Home</button>
+        <button class="pill" onclick="pickPill(this,'mm-src')">7-Eleven</button>
+        <button class="pill" onclick="pickPill(this,'mm-src')">Restaurant</button>
+        <button class="pill" onclick="pickPill(this,'mm-src')">Other</button>
+      </div>
+      <div class="flbl">RECIPE STEPS</div>
+      <div id="mm-steps"></div>
+      <button class="btn-outline" style="margin-top:4px" onclick="addStepRow()">Ôºã Add step</button>
+      <div class="flbl">HINT / TIP (optional)</div>
+      <input class="finp" id="mm-hint" placeholder="e.g. Use half the sauce">
+      <div style="display:flex;gap:8px;margin-top:18px">
+        <button class="rbtn" style="flex:1;margin:0" onclick="closeMealModal()">Cancel</button>
+        <button class="btn-pink" style="flex:1" onclick="saveMeal()">Save Meal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add to Day Modal -->
+  <div class="modal-bg" id="atd-modal">
+    <div class="modal" style="max-height:50vh">
+      <h3>Add to Day</h3>
+      <div class="flbl">WHICH DAY?</div>
+      <div class="pill-row" id="atd-day">
+        <button class="pill on" onclick="pickPill(this,'atd-day')">Day 1</button>
+        <button class="pill" onclick="pickPill(this,'atd-day')">Day 2</button>
+        <button class="pill" onclick="pickPill(this,'atd-day')">Day 3</button>
+      </div>
+      <div class="flbl" style="margin-top:14px">WHICH SLOT?</div>
+      <div class="pill-row" id="atd-slot">
+        <button class="pill on" onclick="pickPill(this,'atd-slot')">Breakfast</button>
+        <button class="pill" onclick="pickPill(this,'atd-slot')">Lunch</button>
+        <button class="pill" onclick="pickPill(this,'atd-slot')">Dinner</button>
+        <button class="pill" onclick="pickPill(this,'atd-slot')">Snack</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:18px">
+        <button class="rbtn" style="flex:1;margin:0" onclick="closeAtdModal()">Cancel</button>
+        <button class="btn-pink" style="flex:1" onclick="confirmAtd()">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="botnav">
+    <button class="ni on" id="ni-today" onclick="nav('today')"><span class="ni-ic">üìã</span><span class="ni-lb">TRACK</span></button>
+    <button class="ni" id="ni-meals" onclick="nav('meals')"><span class="ni-ic">üçΩ</span><span class="ni-lb">MEALS</span></button>
+    <button class="ni" id="ni-plan" onclick="nav('plan')"><span class="ni-ic">üìÖ</span><span class="ni-lb">PLAN</span></button>
+    <button class="ni" id="ni-grocery" onclick="nav('grocery')"><span class="ni-ic">üõí</span><span class="ni-lb">GROCERY</span></button>
+    <button class="ni" id="ni-scan" onclick="nav('scan')"><span class="ni-ic">üì∑</span><span class="ni-lb">SCAN</span></button>
+    <button class="ni" id="ni-budget" onclick="nav('budget')"><span class="ni-ic">üí∞</span><span class="ni-lb">BUDGET</span></button>
+  </div>
+
+</div>
+
+<script>
+var T={kcal:1380,p:120,c:115,f:42};
+
+var DAYS=[
+  {label:"Rotate breakfast ¬∑ 7-Eleven lunch ¬∑ home dinner",meals:[
+    {ty:"Breakfast",ti:"8:00‚Äì8:30 am",name:"Banana + boiled eggs + berries",desc:"1 small banana ¬∑ 2 boiled eggs ¬∑ 50g blueberries",kcal:310,p:14,c:38,f:10,src:"home",recipe:[
+      {s:"Night before",t:"<b>Boil 6‚Äì8 eggs</b> for 10 min. Cool, refrigerate unpeeled. This covers your whole week ‚Äî do it once on Sunday and Wednesday."},
+      {s:"Morning ‚Äî 2 min",t:"Peel 2 cold eggs. Grab 1 small banana and 50g blueberries. You have time with a 10am start ‚Äî eat sitting down properly."},
+      {s:"Done",t:"Eat by 8:30am, leave for work at 9:30am. <b>No cooking, no rush.</b>"}
+    ]},
+    {ty:"Lunch",ti:"1:00‚Äì2:00 pm",name:"Grilled chicken rice box + PH water",desc:"‡∏Ç‡πâ‡∏≤‡∏ß‡∏´‡∏≠‡∏°‡∏°‡∏±‡∏ô‡∏õ‡∏π‡∏≠‡∏Å‡πÑ‡∏Å‡πà‡∏¢‡πà‡∏≤‡∏á‡∏à‡∏¥‡πâ‡∏°‡πÅ‡∏à‡πà‡∏ß 59‡∏ø ¬∑ PH Plus water 30‡∏ø ‚Äî order via 7-Eleven app",kcal:420,p:35,c:52,f:8,src:"7-eleven",recipe:[
+      {s:"Order this",t:"<b>‡∏Ç‡πâ‡∏≤‡∏ß‡∏´‡∏≠‡∏°‡∏°‡∏±‡∏ô‡∏õ‡∏π‡∏≠‡∏Å‡πÑ‡∏Å‡πà‡∏¢‡πà‡∏≤‡∏á‡∏à‡∏¥‡πâ‡∏°‡πÅ‡∏à‡πà‡∏ß</b> ‚Äî grilled chicken breast rice box, 59‡∏ø. Best macro item on the 7-Eleven menu for your goals."},
+      {s:"The sauce",t:"The dipping sauce (‡∏à‡∏¥‡πâ‡∏°‡πÅ‡∏à‡πà‡∏ß) is mostly tamarind and sugar. <b>Use half or skip it</b> ‚Äî saves 40‚Äì60 kcal you don't need."},
+      {s:"Order tip",t:"Order ahead on the app before your break so it arrives on time. Add PH Plus water (30‡∏ø). <b>Sit down and actually take your break.</b>"}
+    ]},
+    {ty:"Dinner",ti:"8:00‚Äì8:30 pm",name:"Garlic chicken rice ‚Äî ‡πÑ‡∏Å‡πà‡∏ó‡∏≠‡∏î‡∏Å‡∏£‡∏∞‡πÄ‡∏ó‡∏µ‡∏¢‡∏°",desc:"150g chicken breast ¬∑ 70g jasmine rice ¬∑ garlic ¬∑ spring onion",kcal:480,p:52,c:36,f:8,src:"home",recipe:[
+      {s:"Home at 7:30 ‚Äî rest first",t:"Change clothes, sit for 15‚Äì20 min. <b>Don't cook the second you walk in.</b> You just did a 9-hour shift."},
+      {s:"Batch rice once",t:"Cook 300g dry rice at once. Portion into 70g servings. Lasts 3 days ‚Äî just reheat tonight's portion."},
+      {s:"Marinate",t:"Slice 150g chicken breast thin. Mix with <b>4‚Äì5 crushed garlic cloves</b>, pinch of white pepper, 1 tsp fish sauce. Rest 10 min."},
+      {s:"Cook ‚Äî 8 min",t:"Non-stick pan high heat. Half tsp oil or spray. Garlic first ‚Äî 30 sec until golden. Add chicken, stir-fry <b>4‚Äì5 min</b> until cooked through."},
+      {s:"Season and eat",t:"Add 1 tsp oyster sauce, tiny splash fish sauce. Toss 30 sec. Plate over rice, top with spring onion. <b>Total: 8 minutes.</b>"}
+    ]}
+  ]},
+  {label:"Rotate breakfast ¬∑ 7-Eleven lunch ¬∑ home dinner",meals:[
+    {ty:"Breakfast",ti:"8:00‚Äì8:30 am",name:"Overnight oats + banana + egg",desc:"40g oats soaked overnight ¬∑ 1 banana ¬∑ 1 boiled egg",kcal:340,p:16,c:52,f:7,src:"home",recipe:[
+      {s:"Night before ‚Äî 90 sec",t:"Put <b>40g rolled oats</b> in a jar. Add 120ml water or splash of milk. Lid on, fridge. Done."},
+      {s:"Morning ‚Äî 1 min",t:"Take jar out. Slice 1 banana on top. Grab a cold boiled egg. Eat at home ‚Äî <b>10am start means zero rush.</b>"},
+      {s:"No cooking",t:"Oats are eaten cold ‚Äî overnight oats need no reheating. Chewy, filling, ready in 60 seconds."}
+    ]},
+    {ty:"Lunch",ti:"1:00‚Äì2:00 pm",name:"Protein shake + grilled chicken rice box",desc:"Farmhouse banana shake 49‡∏ø + chicken rice box 59‡∏ø ‚Äî 7-Eleven delivery",kcal:490,p:66,c:54,f:10,src:"7-eleven",recipe:[
+      {s:"Order both",t:"<b>Farmhouse high-protein banana shake</b> (49‡∏ø) + grilled chicken rice box (59‡∏ø). Total 108‡∏ø. Highest protein lunch of the week ‚Äî 66g in one meal."},
+      {s:"Why the shake today",t:"Breakfast was oats + egg ‚Äî moderate protein. The shake bumps you up to <b>hit your 120g daily target</b> without needing a massive dinner."},
+      {s:"How to eat",t:"Drink the shake first, eat the rice box after. Skip or use half the sauce. Order ahead on the app."}
+    ]},
+    {ty:"Dinner",ti:"8:00‚Äì8:30 pm",name:"Pan-seared steak + avocado + raspberries",desc:"130g lean sirloin ¬∑ ¬º avocado ¬∑ 80g raspberries",kcal:430,p:38,c:12,f:22,src:"home",recipe:[
+      {s:"Rest first",t:"Home at 7:30 ‚Äî <b>decompress 15‚Äì20 min</b> before you even think about cooking."},
+      {s:"Rest the steak",t:"Take steak out of fridge 15 min before cooking. Pat completely dry with paper towel ‚Äî this is how you get a crust with no oil."},
+      {s:"Sear ‚Äî 6 min",t:"Non-stick pan on <b>maximum heat</b> until it smokes. Add steak ‚Äî no oil. Don't touch for 2.5 min. Flip, 2.5 more min. Medium for 1.5cm thickness."},
+      {s:"Rest and plate",t:"Rest steak <b>2‚Äì3 min</b> before slicing. Fan out ¬º avocado, add 80g raspberries. Done."}
+    ]}
+  ]},
+  {label:"Rotate breakfast ¬∑ 7-Eleven lunch ¬∑ home dinner",meals:[
+    {ty:"Breakfast",ti:"8:00‚Äì8:30 am",name:"Eggs + avocado + raspberries",desc:"2 boiled eggs ¬∑ ¬º avocado ¬∑ 60g raspberries",kcal:280,p:14,c:10,f:18,src:"home",recipe:[
+      {s:"2 min grab",t:"2 cold boiled eggs from fridge. Slice <b>¬º avocado</b> (wrap the rest with seed in cling film ‚Äî stops browning). Pack 60g raspberries."},
+      {s:"Why this works",t:"High fat + protein keeps you full <b>all the way to your 1pm break</b> ‚Äî 4.5 hours no problem."},
+      {s:"Relax",t:"10am start ‚Äî eat at home, sit down. <b>No rushing out the door.</b>"}
+    ]},
+    {ty:"Lunch",ti:"1:00‚Äì2:00 pm",name:"Grilled chicken rice box + granola bar",desc:"‡∏Ç‡πâ‡∏≤‡∏ß‡∏´‡∏≠‡∏°‡∏°‡∏±‡∏ô‡∏õ‡∏π‡∏≠‡∏Å‡πÑ‡∏Å‡πà‡∏¢‡πà‡∏≤‡∏á 59‡∏ø + ‡πÄ‡∏Å‡∏£‡∏ô‡πÄ‡∏ô‡πà‡∏¢‡πå‡∏ö‡∏≤‡∏£‡πå‡∏≠‡∏±‡∏•‡∏°‡∏≠‡∏ô‡∏î‡πå 20‡∏ø ‚Äî 7-Eleven delivery",kcal:450,p:37,c:60,f:10,src:"7-eleven",recipe:[
+      {s:"Order this combo",t:"Grilled chicken rice box (59‡∏ø) + 1 granola bar almond choc (‡πÄ‡∏Å‡∏£‡∏ô‡πÄ‡∏ô‡πà‡∏¢‡πå‡∏ö‡∏≤‡∏£‡πå‡∏ä‡∏¥‡∏û‡∏≠‡∏±‡∏•‡∏°‡∏≠‡∏ô‡∏î‡πå, 20‡∏ø). Total 79‡∏ø."},
+      {s:"The granola bar",t:"About 100 kcal, mostly oats and almonds. <b>Eat it after the rice box</b> ‚Äî it's a finisher. Max 1 per day."},
+      {s:"Why today",t:"Day 3 breakfast was low-carb (eggs + avocado). The granola bar bumps carbs up to keep <b>energy good for the last stretch of shift.</b>"}
+    ]},
+    {ty:"Dinner",ti:"8:00‚Äì8:30 pm",name:"Garlic chicken + rice + banana",desc:"150g chicken breast ¬∑ 60g jasmine rice ¬∑ garlic ¬∑ 1 small banana",kcal:470,p:50,c:50,f:8,src:"home",recipe:[
+      {s:"Same garlic chicken",t:"Cook ‡πÑ‡∏Å‡πà‡∏ó‡∏≠‡∏î‡∏Å‡∏£‡∏∞‡πÄ‡∏ó‡∏µ‡∏¢‡∏° exactly as Day 1. 8 minutes. You know this by now."},
+      {s:"The banana",t:"Eat the banana <b>after dinner</b> ‚Äî it's your treat. 7pm finish, long shift, you earned it."},
+      {s:"End of cycle",t:"Day 3 done. Tonight: <b>boil 6‚Äì8 eggs, soak oats in a jar, check grocery list.</b> Reset and repeat."}
+    ]}
+  ]}
+];
+
+var GROC=[
+  {cat:"HOME ‚Äî PROTEINS",items:[
+    {n:"Chicken breast",note:"450g ¬∑ wet market / Lotus ¬∑ 3 dinners",price:75},
+    {n:"Lean sirloin steak",note:"150g ¬∑ Big C / Villa Market ¬∑ Day 2 dinner",price:90},
+    {n:"Eggs",note:"10 pack ¬∑ any market",price:45}
+  ]},
+  {cat:"HOME ‚Äî FRUITS",items:[
+    {n:"Raspberries",note:"150g ¬∑ Tops / Gourmet Market",price:75},
+    {n:"Blueberries",note:"125g ¬∑ Tops / Villa",price:79},
+    {n:"Banana (kluay hom)",note:"5 small ¬∑ any market",price:20},
+    {n:"Avocado",note:"2 pcs ¬∑ Tops / Lotus",price:80}
+  ]},
+  {cat:"HOME ‚Äî GRAINS & PANTRY",items:[
+    {n:"Jasmine rice",note:"500g ¬∑ any supermarket",price:25},
+    {n:"Rolled oats",note:"500g ¬∑ Tops / Lotus",price:65},
+    {n:"Garlic",note:"1 head ¬∑ wet market",price:10},
+    {n:"Spring onion",note:"1 bunch",price:10},
+    {n:"Fish sauce + oyster sauce",note:"small bottles, low sodium",price:25}
+  ]},
+  {cat:"7-ELEVEN ‚Äî ORDER AT WORK",items:[
+    {n:"Grilled chicken rice box x3",note:"‡∏Ç‡πâ‡∏≤‡∏ß‡∏´‡∏≠‡∏°‡∏°‡∏±‡∏ô‡∏õ‡∏π‡∏≠‡∏Å‡πÑ‡∏Å‡πà‡∏¢‡πà‡∏≤‡∏á ¬∑ 59‡∏ø each ¬∑ every day",price:177},
+    {n:"Protein shake x1",note:"Farmhouse banana 340ml ¬∑ Day 2 only",price:49},
+    {n:"Granola bar x1",note:"‡πÄ‡∏Å‡∏£‡∏ô‡πÄ‡∏ô‡πà‡∏¢‡πå‡∏ö‡∏≤‡∏£‡πå‡∏≠‡∏±‡∏•‡∏°‡∏≠‡∏ô‡∏î‡πå ¬∑ Day 3 only",price:20},
+    {n:"PH Plus water x3",note:"1000ml ¬∑ order with every lunch",price:90}
+  ]}
+];
+
+var SCHED=[
+  {t:"8:00‚Äì8:30 am",h:"Wake up + breakfast",n:"Zero cooking. Eggs from fridge, soaked oats, fruit. Eat properly at home ‚Äî you have time with a 10am start.",dot:"pk"},
+  {t:"9:30 am",h:"Leave for work",n:"You're not racing. Lunch will be delivered. Enjoy the slower morning.",dot:""},
+  {t:"10:00 am",h:"Shift starts",n:"3 hours until your lunch break. Breakfast from 8:30am keeps you fuelled no problem.",dot:""},
+  {t:"1:00‚Äì2:00 pm",h:"Lunch ‚Äî 7-Eleven delivery",n:"Order on the app before your break starts. Grilled chicken rice box every day. Sit down, take the full break.",dot:"pk"},
+  {t:"5:00 pm",h:"Optional snack",n:"Only if genuinely hungry. 1 boiled egg or 1 small banana. Last 2 hours of shift ‚Äî don't arrive home starving.",dot:"am"},
+  {t:"7:00 pm",h:"Shift ends",n:"Head straight home. Don't stop to grab junk ‚Äî dinner is fast at home.",dot:""},
+  {t:"7:30 pm",h:"Home ‚Äî rest first",n:"Change, sit down, decompress 15‚Äì20 min before cooking. Don't stress-eat the second you walk in.",dot:"pk"},
+  {t:"8:00‚Äì8:30 pm",h:"Dinner",n:"Garlic chicken: 8 min. Steak: 6 min. Batch rice already in the fridge. Eat by 8:30pm comfortably.",dot:"pk"},
+  {t:"10:00 pm",h:"Kitchen closed",n:"If hungry after 10pm, drink a full glass of water and wait 10 min. Usually thirst.",dot:""},
+  {t:"Before sleep",h:"Set up tomorrow",n:"Boil 6‚Äì8 eggs. Pour oats in jar with water. Pack fruit. Tomorrow's breakfast is done.",dot:"pk"}
+];
+
+var RULES=[
+  {ti:"Prep eggs the night before ‚Äî always",b:"Boil 6‚Äì8 eggs on Sunday and Wednesday. This is the one habit that makes breakfast actually happen every day. No prep = no breakfast."},
+  {ti:"Lunch is always 7-Eleven ‚Äî and that's fine",b:"Grilled chicken rice box every single day. 35g protein, controlled fat, real food. One of the best convenience lunches available. Order on the app before your break."},
+  {ti:"Overnight oats = 90 seconds",b:"Jar + 40g oats + water in fridge. Morning: slice banana on top. Zero cooking. With a 10am start you can eat breakfast sitting down like a human being."},
+  {ti:"Spread protein across 3 meals",b:"Muscles can only use about 40g protein per sitting. 3 meals = better muscle retention than 2 big dumps. This is exactly why adding breakfast matters."},
+  {ti:"Deficit is small on purpose",b:"About 300 kcal/day under your TDEE. Slow = muscle stays, fat goes. Nurses are on their feet all day ‚Äî too aggressive a cut destroys your shift energy."},
+  {ti:"Berries every single breakfast",b:"Raspberries + blueberries: low sugar, high fibre, anti-inflammatory. Skin and recovery benefits. Daily staple ‚Äî non-negotiable."},
+  {ti:"Big booty part of the protocol",b:"Add 15 min of glute work 3x/week: hip thrusts, squats, donkey kicks. No gym needed. Your diet is set up to fuel exactly this."},
+  {ti:"Expected results at 8 weeks",b:"2.5 to 4 kg fat lost. Waist visibly smaller. Glutes more defined. Rate: 0.3‚Äì0.5 kg fat per week. Slow, controlled, keeps your muscle."}
+];
+
+var S={day:0,chk:{},gdone:{}};
+function loadS(){try{var r=JSON.parse(localStorage.getItem('arya4')||'{}');if(r.chk)S.chk=r.chk;if(r.gdone)S.gdone=r.gdone;if(r.day)S.day=r.day;}catch(e){}}
+function saveS(){try{localStorage.setItem('arya4',JSON.stringify(S));}catch(e){}}
+
+var TABS=['today','meals','plan','grocery','scan','budget'];
+function nav(id){
+  TABS.forEach(function(p){
+    document.getElementById('pg-'+p).classList.toggle('on',p===id);
+    document.getElementById('ni-'+p).classList.toggle('on',p===id);
+  });
+  document.getElementById('scroll').scrollTop=0;
+  if(id==='budget')renderBudget();
+  if(id==='meals')renderMeals();
+  if(id==='plan'){buildPlan();buildSched();}
+  if(id==='scan')initScan();
+}
+
+/* ‚îÄ‚îÄ TODAY ‚îÄ‚îÄ */
+var openD=null;
+function setDay(i){
+  S.day=i;saveS();
+  [0,1,2].forEach(function(j){document.getElementById('dt'+j).classList.toggle('on',j===i);});
+  document.getElementById('dlabel').textContent=DAYS[i].label;
+  buildMeals(i);updateRing();
+}
+
+var CHK='<svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7L10 1" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round"/></svg>';
+
+function buildMeals(di){
+  var d=DAYS[di],h='';
+  d.meals.forEach(function(m,mi){
+    var k=di+'-'+mi,done=!!S.chk[k];
+    var bdg=m.src==='7-eleven'?'<span class="bdg b7">7-Eleven</span>':'<span class="bdg bh">home</span>';
+    var mw=m.kcal,pp=Math.round(m.p*4/mw*100),cp=Math.round(m.c*4/mw*100),fp=Math.round(m.f*9/mw*100);
+    var steps=m.recipe.map(function(r,si){return '<div class="rs"><div class="sn">'+(si+1)+'</div><div class="st"><span class="sh">'+r.s+'</span>'+r.t+'</div></div>';}).join('');
+    h+='<div class="mout">'
+      +'<div class="mhdr"><span class="mty">'+m.ty.toUpperCase()+'</span><span class="mti">¬∑ '+m.ti+'</span></div>'
+      +'<div class="mrow">'
+        +'<div class="chk'+(done?' on':'')+'" id="ck'+k+'" onclick="doChk(\''+k+'\')">'+(done?CHK:'')+'</div>'
+        +'<div class="minf" id="mi'+k+'" onclick="togD(\''+k+'\')" style="opacity:'+(done?.4:1)+'">'
+          +'<div class="mn">'+m.name+bdg+'</div>'
+          +'<div class="md">'+m.desc+'</div>'
+          +'<div class="mhnt" id="hn'+k+'">&#9660; How to make it</div>'
+        +'</div>'
+        +'<div id="kc'+k+'" style="text-align:right;flex-shrink:0;opacity:'+(done?.4:1)+'"><div class="mkn">'+m.kcal+'</div><div class="mku">kcal</div></div>'
+      +'</div>'
+      +'<div class="drw" id="dr'+k+'"><div class="rin"><div class="rtl">HOW TO MAKE IT</div>'+steps
+        +'<div class="mb"><div class="mp" style="width:'+pp+'%"></div><div class="mc" style="width:'+cp+'%"></div><div class="mf" style="width:'+fp+'%"></div></div>'
+        +'<div class="ml"><div class="mli"><div class="md2" style="background:#4ade80"></div>P '+m.p+'g</div><div class="mli"><div class="md2" style="background:#60a5fa"></div>C '+m.c+'g</div><div class="mli"><div class="md2" style="background:#fbbf24"></div>F '+m.f+'g</div></div>'
+      +'</div></div>'
+    +'</div>';
+  });
+  document.getElementById('mcard').innerHTML=h;openD=null;
+}
+
+function doChk(k){
+  S.chk[k]=!S.chk[k];saveS();
+  var done=S.chk[k];
+  var cb=document.getElementById('ck'+k);
+  cb.classList.toggle('on',done);cb.innerHTML=done?CHK:'';
+  document.getElementById('mi'+k).style.opacity=done?.4:1;
+  document.getElementById('kc'+k).style.opacity=done?.4:1;
+  updateRing();
+}
+
+function togD(k){
+  var dr=document.getElementById('dr'+k),hn=document.getElementById('hn'+k);
+  if(openD&&openD!==dr){openD.classList.remove('open');var pk=openD.id.slice(2);var ph=document.getElementById('hn'+pk);if(ph)ph.innerHTML='&#9660; How to make it';}
+  var o=dr.classList.contains('open');
+  dr.classList.toggle('open',!o);
+  hn.innerHTML=o?'&#9660; How to make it':'&#9650; Hide instructions';
+  openD=o?null:dr;
+  if(!o)setTimeout(function(){dr.scrollIntoView({behavior:'smooth',block:'nearest'});},60);
+}
+
+function updateRing(){
+  var d=DAYS[S.day],kc=0,p=0,c=0,f=0;
+  d.meals.forEach(function(m,i){if(S.chk[S.day+'-'+i]){kc+=m.kcal;p+=m.p;c+=m.c;f+=m.f;}});
+  var ci=175.93;
+  document.getElementById('rnum').textContent=kc;
+  document.getElementById('rarc').setAttribute('stroke-dasharray',(Math.min(kc/T.kcal,1)*ci)+' '+ci);
+  document.getElementById('bp').style.width=Math.min(p/T.p*100,100)+'%';
+  document.getElementById('bc').style.width=Math.min(c/T.c*100,100)+'%';
+  document.getElementById('bf').style.width=Math.min(f/T.f*100,100)+'%';
+  document.getElementById('vp').textContent=p+'/120g';
+  document.getElementById('vc').textContent=c+'/115g';
+  document.getElementById('vf').textContent=f+'/42g';
+  document.getElementById('rmsg').textContent=kc===0?'Tap meals to track \uD83D\uDCAA':kc>=T.kcal?'Target hit! \uD83C\uDFAF':(T.kcal-kc)+' kcal remaining';
+}
+
+/* ‚îÄ‚îÄ PLAN ‚îÄ‚îÄ */
+var openD2=null;
+function buildPlan(){
+  var h='';
+  DAYS.forEach(function(dd,di){
+    var tk=0,tp=0,tc=0;dd.meals.forEach(function(m){tk+=m.kcal;tp+=m.p;tc+=m.c;});
+    var mr='';
+    dd.meals.forEach(function(m){
+      var bdg=m.src==='7-eleven'?'<span class="bdg b7">7-Eleven</span>':'<span class="bdg bh">home</span>';
+      var mw=m.kcal,pp=Math.round(m.p*4/mw*100),cp=Math.round(m.c*4/mw*100),fp=Math.round(m.f*9/mw*100);
+      var dk='p'+di+m.ty.replace(/\s/g,'');
+      var steps=m.recipe.map(function(r,si){return '<div class="rs"><div class="sn">'+(si+1)+'</div><div class="st"><span class="sh">'+r.s+'</span>'+r.t+'</div></div>';}).join('');
+      mr+='<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)">'
+        +'<div class="mhdr"><span class="mty">'+m.ty.toUpperCase()+'</span><span class="mti">¬∑ '+m.ti+'</span></div>'
+        +'<div style="display:flex;justify-content:space-between;gap:10px">'
+          +'<div style="flex:1;cursor:pointer" onclick="togD2(\''+dk+'\')">'
+            +'<div class="mn" style="font-size:13px">'+m.name+bdg+'</div>'
+            +'<div class="md">'+m.desc+'</div>'
+            +'<div class="mhnt" id="ph'+dk+'">&#9660; How to make it</div>'
+          +'</div>'
+          +'<div style="text-align:right;flex-shrink:0"><div class="mkn">'+m.kcal+'</div><div class="mku">kcal</div></div>'
+        +'</div>'
+        +'<div class="mb"><div class="mp" style="width:'+pp+'%"></div><div class="mc" style="width:'+cp+'%"></div><div class="mf" style="width:'+fp+'%"></div></div>'
+        +'<div class="ml"><div class="mli"><div class="md2" style="background:#4ade80"></div>P '+m.p+'g</div><div class="mli"><div class="md2" style="background:#60a5fa"></div>C '+m.c+'g</div><div class="mli"><div class="md2" style="background:#fbbf24"></div>F '+m.f+'g</div></div>'
+        +'<div class="drw" id="pd'+dk+'"><div class="rin" style="margin-top:10px"><div class="rtl">HOW TO MAKE IT</div>'+steps+'</div></div>'
+      +'</div>';
+    });
+    h+='<div class="card" style="padding:13px 15px;margin-bottom:12px">'
+      +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">'
+        +'<div style="width:28px;height:28px;border-radius:8px;background:rgba(244,114,182,.14);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#f472b6;flex-shrink:0">'+(di+1)+'</div>'
+        +'<div><div style="font-size:13px;font-weight:800">Day '+(di+1)+'</div><div style="font-size:11px;color:rgba(255,255,255,.3)">'+dd.label+'</div></div>'
+      +'</div>'+mr
+      +'<div class="dtot"><span style="font-size:11px;color:rgba(255,255,255,.34)">Day total</span><div class="dtvs"><span class="dtv">'+tk+' kcal</span><span class="dtv" style="color:#4ade80">P '+tp+'g</span><span class="dtv" style="color:#60a5fa">C '+tc+'g</span></div></div>'
+    +'</div>';
+  });
+  document.getElementById('planwrap').innerHTML=h;
+}
+function togD2(k){
+  var dr=document.getElementById('pd'+k),hn=document.getElementById('ph'+k);
+  if(openD2&&openD2!==dr){openD2.classList.remove('open');var pk=openD2.id.slice(2);var ph=document.getElementById('ph'+pk);if(ph)ph.innerHTML='&#9660; How to make it';}
+  var o=dr.classList.contains('open');
+  dr.classList.toggle('open',!o);
+  hn.innerHTML=o?'&#9660; How to make it':'&#9650; Hide instructions';
+  openD2=o?null:dr;
+  if(!o)setTimeout(function(){dr.scrollIntoView({behavior:'smooth',block:'nearest'});},60);
+}
+
+/* ‚îÄ‚îÄ GROCERY ‚îÄ‚îÄ */
+var GITEMS=[];
+function buildGroc(){
+  GITEMS=[];GROC.forEach(function(g){g.items.forEach(function(it){GITEMS.push(it);});});
+  var h='',idx=0;
+  GROC.forEach(function(g){
+    h+='<div class="sec">'+g.cat+'</div><div class="card" style="padding:0;overflow:hidden">';
+    g.items.forEach(function(it){
+      var i=idx++,done=!!S.gdone[i];
+      h+='<div class="gi'+(done?' dn':'')+'" id="gi'+i+'" onclick="togG('+i+')">'
+        +'<div class="gcb'+(done?' on':'')+'" id="gcb'+i+'">'+(done?CHK:'')+'</div>'
+        +'<div style="flex:1"><div class="gn">'+it.n+'</div><div class="gno">'+it.note+'</div></div>'
+        +'<div class="gp" id="gp'+i+'" style="color:'+(done?'#4ade80':'rgba(255,255,255,.5)')+'">‡∏ø'+it.price+'</div>'
+      +'</div>';
+    });
+    h+='</div>';
+  });
+  document.getElementById('grocwrap').innerHTML=h;updGT();
+}
+function togG(i){
+  S.gdone[i]=!S.gdone[i];saveS();var done=S.gdone[i];
+  document.getElementById('gi'+i).classList.toggle('dn',done);
+  var cb=document.getElementById('gcb'+i);cb.classList.toggle('on',done);cb.innerHTML=done?CHK:'';
+  document.getElementById('gp'+i).style.color=done?'#4ade80':'rgba(255,255,255,.5)';
+  updGT();
+}
+function updGT(){
+  var cart=0,cnt=0;
+  GITEMS.forEach(function(it,i){if(S.gdone[i]){cart+=it.price;cnt++;}});
+  document.getElementById('gcart').textContent=cart;
+  document.getElementById('gcnt').textContent=cnt;
+}
+function resetGroc(){S.gdone={};saveS();buildGroc();}
+
+/* ‚îÄ‚îÄ SCHEDULE ‚îÄ‚îÄ */
+function buildSched(){
+  var h='';
+  SCHED.forEach(function(s){
+    h+='<div class="tli"><div class="tdot '+s.dot+'"></div><div class="tt '+s.dot+'">'+s.t+'</div><div class="th">'+s.h+'</div><div class="tn">'+s.n+'</div></div>';
+  });
+  h+='<div class="sec" style="margin-top:24px">THE PROTOCOL RULES</div>';
+  h+='<div class="rbanner"><div style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:8px">AT 8 WEEKS</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">'
+    +'<div><div class="rv">-2.5‚Äì4kg</div><div class="rl">fat lost</div></div>'
+    +'<div><div class="rv">Waist</div><div class="rl">smaller</div></div>'
+    +'<div><div class="rv">Glutes</div><div class="rl">defined</div></div>'
+    +'</div></div>';
+  RULES.forEach(function(r){
+    h+='<div class="rc"><div class="rct">'+r.ti+'</div><div class="rcb">'+r.b+'</div></div>';
+  });
+  document.getElementById('schedwrap').innerHTML=h;
+}
+
+/* ‚îÄ‚îÄ CUSTOM MEALS ‚îÄ‚îÄ */
+var customMeals=[];
+var editingMealId=null;
+var atdMealId=null;
+var customAssign=[];
+function loadCustom(){try{customMeals=JSON.parse(localStorage.getItem('custom_meals')||'[]');}catch(e){customMeals=[];}try{customAssign=JSON.parse(localStorage.getItem('custom_assignments')||'[]');}catch(e){customAssign=[];}}
+function saveCustom(){localStorage.setItem('custom_meals',JSON.stringify(customMeals));localStorage.setItem('custom_assignments',JSON.stringify(customAssign));}
+
+function renderMeals(){
+  loadCustom();
+  var wrap=document.getElementById('mealslist');
+  if(!customMeals.length){wrap.innerHTML='<div class="mm-empty">No custom meals yet.<br>Tap Ôºã to create your first.</div>';return;}
+  var h='';
+  customMeals.forEach(function(m){
+    var mw=m.kcal||1,pp=Math.round((m.p||0)*4/mw*100),cp=Math.round((m.c||0)*4/mw*100),fp=Math.round((m.f||0)*9/mw*100);
+    var srcCls=m.src==='7-Eleven'?'b7':m.src==='Home'?'bh':'bc';
+    h+='<div class="card" style="padding:13px 15px;margin-bottom:11px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start">'
+        +'<div style="flex:1"><div class="mn">'+esc(m.name)+'<span class="bdg '+srcCls+'">'+esc(m.src||'Home')+'</span></div>'
+          +'<div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:3px">'+esc(m.ty||'Meal')+' ¬∑ '+(m.kcal||0)+' kcal</div>'
+          +'<div class="mb"><div class="mp" style="width:'+pp+'%"></div><div class="mc" style="width:'+cp+'%"></div><div class="mf" style="width:'+fp+'%"></div></div>'
+          +'<div class="ml"><div class="mli"><div class="md2" style="background:#4ade80"></div>P '+(m.p||0)+'g</div><div class="mli"><div class="md2" style="background:#60a5fa"></div>C '+(m.c||0)+'g</div><div class="mli"><div class="md2" style="background:#fbbf24"></div>F '+(m.f||0)+'g</div></div>'
+        +'</div>'
+        +'<div class="mkc"><div class="mkn">'+(m.kcal||0)+'</div><div class="mku">kcal</div></div>'
+      +'</div>'
+      +'<div class="mm-card-actions">'
+        +'<button class="btn-outline" onclick="openAtdModal(\''+m.id+'\')">Ôºã Add to Day</button>'
+        +'<button onclick="editMeal(\''+m.id+'\')" style="background:none;border:none;font-size:16px;cursor:pointer">‚úèÔ∏è</button>'
+        +'<button onclick="deleteMeal(\''+m.id+'\')" style="background:none;border:none;font-size:16px;cursor:pointer">üóë</button>'
+      +'</div>'
+    +'</div>';
+  });
+  wrap.innerHTML=h;
+}
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function pickPill(el,gid){
+  var btns=document.getElementById(gid).querySelectorAll('.pill');
+  btns.forEach(function(b){b.classList.remove('on');});
+  el.classList.add('on');
+}
+function getPill(gid){
+  var active=document.getElementById(gid).querySelector('.pill.on');
+  return active?active.textContent:'';
+}
+
+function openMealModal(id){
+  editingMealId=id||null;
+  document.getElementById('meal-modal-title').textContent=id?'Edit Meal':'New Meal';
+  if(id){
+    var m=customMeals.find(function(x){return x.id===id;});
+    if(!m)return;
+    document.getElementById('mm-name').value=m.name||'';
+    setPill('mm-type',m.ty||'Breakfast');
+    document.getElementById('mm-time').value=m.ti||'';
+    document.getElementById('mm-desc').value=m.desc||'';
+    document.getElementById('mm-kcal').value=m.kcal||'';
+    document.getElementById('mm-p').value=m.p||'';
+    document.getElementById('mm-c').value=m.c||'';
+    document.getElementById('mm-f').value=m.f||'';
+    setPill('mm-src',m.src||'Home');
+    document.getElementById('mm-hint').value=m.hint||'';
+    var stepsWrap=document.getElementById('mm-steps');stepsWrap.innerHTML='';
+    (m.recipe||[]).forEach(function(r){addStepRow(r.s,r.t);});
+  } else {
+    document.getElementById('mm-name').value='';
+    setPill('mm-type','Breakfast');
+    document.getElementById('mm-time').value='';
+    document.getElementById('mm-desc').value='';
+    document.getElementById('mm-kcal').value='';
+    document.getElementById('mm-p').value='';
+    document.getElementById('mm-c').value='';
+    document.getElementById('mm-f').value='';
+    setPill('mm-src','Home');
+    document.getElementById('mm-hint').value='';
+    document.getElementById('mm-steps').innerHTML='';
+  }
+  document.getElementById('meal-modal').classList.add('open');
+}
+function closeMealModal(){document.getElementById('meal-modal').classList.remove('open');}
+
+function setPill(gid,val){
+  var btns=document.getElementById(gid).querySelectorAll('.pill');
+  btns.forEach(function(b){b.classList.toggle('on',b.textContent===val);});
+}
+
+var stepCount=0;
+function addStepRow(label,text){
+  stepCount++;
+  var id='step'+stepCount;
+  var wrap=document.getElementById('mm-steps');
+  var div=document.createElement('div');div.className='step-row';div.id=id;
+  div.innerHTML='<input class="finp" style="width:80px" placeholder="PREP" value="'+esc(label||'')+'"><input class="finp" placeholder="Instruction" value="'+esc(text||'')+'"><button class="step-rm" onclick="document.getElementById(\''+id+'\').remove()">‚úï</button>';
+  wrap.appendChild(div);
+}
+
+function saveMeal(){
+  var name=document.getElementById('mm-name').value.trim();
+  if(!name)return;
+  var recipe=[];
+  document.getElementById('mm-steps').querySelectorAll('.step-row').forEach(function(row){
+    var inputs=row.querySelectorAll('.finp');
+    if(inputs[1]&&inputs[1].value.trim())recipe.push({s:inputs[0].value.trim()||'STEP',t:inputs[1].value.trim()});
+  });
+  var meal={
+    id:editingMealId||('cm_'+Date.now()),
+    name:name,
+    ty:getPill('mm-type'),
+    ti:document.getElementById('mm-time').value.trim(),
+    desc:document.getElementById('mm-desc').value.trim(),
+    kcal:parseInt(document.getElementById('mm-kcal').value)||0,
+    p:parseInt(document.getElementById('mm-p').value)||0,
+    c:parseInt(document.getElementById('mm-c').value)||0,
+    f:parseInt(document.getElementById('mm-f').value)||0,
+    src:getPill('mm-src'),
+    hint:document.getElementById('mm-hint').value.trim(),
+    recipe:recipe
+  };
+  if(editingMealId){
+    var idx=customMeals.findIndex(function(x){return x.id===editingMealId;});
+    if(idx>=0)customMeals[idx]=meal;
+  } else {
+    customMeals.push(meal);
+  }
+  saveCustom();closeMealModal();renderMeals();
+  buildMeals(S.day);
+}
+
+function editMeal(id){openMealModal(id);}
+function deleteMeal(id){
+  customMeals=customMeals.filter(function(x){return x.id!==id;});
+  customAssign=customAssign.filter(function(a){return a.mealId!==id;});
+  saveCustom();renderMeals();buildMeals(S.day);
+}
+
+/* Add to Day */
+function openAtdModal(mealId){
+  atdMealId=mealId;
+  setPill('atd-day','Day 1');setPill('atd-slot','Breakfast');
+  document.getElementById('atd-modal').classList.add('open');
+}
+function closeAtdModal(){document.getElementById('atd-modal').classList.remove('open');}
+function confirmAtd(){
+  if(!atdMealId)return;
+  var dayStr=getPill('atd-day');
+  var dayIdx=dayStr==='Day 1'?0:dayStr==='Day 2'?1:2;
+  var slot=getPill('atd-slot');
+  customAssign=customAssign.filter(function(a){return !(a.mealId===atdMealId&&a.day===dayIdx&&a.slot===slot);});
+  customAssign.push({mealId:atdMealId,day:dayIdx,slot:slot});
+  saveCustom();closeAtdModal();buildMeals(S.day);
+}
+
+function getCustomForDay(dayIdx){
+  loadCustom();
+  return customAssign.filter(function(a){return a.day===dayIdx;}).map(function(a){
+    var m=customMeals.find(function(x){return x.id===a.mealId;});
+    if(!m)return null;
+    return {ty:a.slot,ti:m.ti||'',name:m.name,desc:m.desc||'',kcal:m.kcal||0,p:m.p||0,c:m.c||0,f:m.f||0,src:'custom',hint:m.hint||'',recipe:m.recipe||[],isCustom:true,assignId:a.mealId+'_'+a.day+'_'+a.slot};
+  }).filter(Boolean);
+}
+
+/* ‚îÄ‚îÄ RECEIPT SCANNER ‚îÄ‚îÄ */
+var scanB64=null,scanMime=null;
+function initScan(){
+  var key=localStorage.getItem('anthropic_key');
+  if(key){
+    document.getElementById('scan-key-setup').style.display='none';
+    document.getElementById('scan-main').style.display='block';
+  } else {
+    showApiSetup();
+  }
+}
+function showApiSetup(){
+  document.getElementById('scan-main').style.display='none';
+  document.getElementById('scan-key-setup').innerHTML='<div class="api-card"><p>Enter your Anthropic API key to enable receipt scanning</p><input class="finp" id="api-key-inp" placeholder="sk-ant-..." style="margin-bottom:10px"><button class="btn-pink" style="width:100%" onclick="saveApiKey()">Save Key</button></div>';
+  document.getElementById('scan-key-setup').style.display='block';
+}
+function saveApiKey(){
+  var k=document.getElementById('api-key-inp').value.trim();
+  if(!k)return;
+  localStorage.setItem('anthropic_key',k);
+  initScan();
+}
+function scanFileChosen(inp){
+  if(!inp.files||!inp.files[0])return;
+  var file=inp.files[0];
+  scanMime=file.type||'image/jpeg';
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var dataUrl=e.target.result;
+    scanB64=dataUrl.split(',')[1];
+    document.getElementById('scan-thumb').src=dataUrl;
+    document.getElementById('scan-thumb').style.display='block';
+    document.getElementById('scan-go').style.display='block';
+    document.getElementById('scan-results').style.display='none';
+  };
+  reader.readAsDataURL(file);
+}
+function doScan(){
+  var key=localStorage.getItem('anthropic_key');
+  if(!key||!scanB64)return;
+  document.getElementById('scan-go').style.display='none';
+  document.getElementById('scan-loading').style.display='block';
+  document.getElementById('scan-results').style.display='none';
+  fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:1024,
+      system:'You are a receipt parser for Thai supermarkets. Extract all purchased items and their prices. Return ONLY valid JSON, no markdown, no explanation. Format: { "items": [{ "name": "item name in english", "price": 99.00 }] }',
+      messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:scanMime,data:scanB64}},{type:'text',text:'Parse this receipt. Return JSON only.'}]}]
+    })
+  }).then(function(r){return r.json();}).then(function(data){
+    document.getElementById('scan-loading').style.display='none';
+    var txt=(data.content&&data.content[0]&&data.content[0].text)||'';
+    try{
+      var parsed=JSON.parse(txt);
+      showScanResults(parsed.items||[]);
+    }catch(e){
+      document.getElementById('scan-results').innerHTML='<div class="card"><p style="color:rgba(255,255,255,.4)">Could not parse response. Try a clearer photo.</p></div>';
+      document.getElementById('scan-results').style.display='block';
+    }
+  }).catch(function(err){
+    document.getElementById('scan-loading').style.display='none';
+    document.getElementById('scan-results').innerHTML='<div class="card"><p style="color:#fb923c">Error: '+esc(err.message)+'</p></div>';
+    document.getElementById('scan-results').style.display='block';
+  });
+}
+var lastScanItems=[];
+function showScanResults(items){
+  lastScanItems=items;
+  var h='<div class="card" style="padding:10px 14px"><div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.3);margin-bottom:8px">ITEMS FOUND</div>';
+  items.forEach(function(it){
+    h+='<div class="scan-item"><span class="sn">'+esc(it.name)+'</span><span class="sp">‡∏ø'+Number(it.price).toFixed(0)+'</span></div>';
+  });
+  var total=items.reduce(function(s,it){return s+Number(it.price);},0);
+  h+='<div style="display:flex;justify-content:space-between;padding-top:10px;margin-top:6px;border-top:1px solid rgba(255,255,255,.08)"><span style="font-weight:800">Total</span><span style="font-weight:800">‡∏ø'+total.toFixed(0)+'</span></div>';
+  h+='<button class="btn-pink" style="width:100%;margin-top:12px" onclick="updateGrocPrices()">Update Grocery Prices</button>';
+  h+='<button class="btn-outline" style="width:100%;margin-top:8px" onclick="logScanToBudget()">üí∞ Log to Budget</button>';
+  h+='</div>';
+  document.getElementById('scan-results').innerHTML=h;
+  document.getElementById('scan-results').style.display='block';
+}
+function updateGrocPrices(){
+  var updated=0;
+  lastScanItems.forEach(function(si){
+    var sn=si.name.toLowerCase().replace(/\s*(g|kg|ml|l|pkg|pcs?|pack)\s*/gi,'').trim();
+    GITEMS.forEach(function(gi){
+      var gn=gi.n.toLowerCase().replace(/\s*(g|kg|ml|l|pkg|pcs?|pack)\s*/gi,'').trim();
+      if(gn.indexOf(sn)>=0||sn.indexOf(gn)>=0||(sn.length>3&&gn.indexOf(sn.slice(0,Math.max(4,Math.floor(sn.length*.6))))>=0)){
+        gi.price=Number(si.price);updated++;
+      }
+    });
+  });
+  buildGroc();
+  var res=document.getElementById('scan-results');
+  res.innerHTML+='<div style="text-align:center;padding:10px;color:#4ade80;font-size:12px;font-weight:700">'+updated+' item'+(updated!==1?'s':'')+' updated in your grocery list</div>';
+}
+function logScanToBudget(){
+  var total=lastScanItems.reduce(function(s,it){return s+Number(it.price);},0);
+  var entries=JSON.parse(localStorage.getItem('budget_entries')||'[]');
+  entries.push({id:'be_'+Date.now(),date:new Date().toISOString(),amount:total,note:'Receipt scan ('+lastScanItems.length+' items)'});
+  localStorage.setItem('budget_entries',JSON.stringify(entries));
+  var res=document.getElementById('scan-results');
+  res.innerHTML+='<div style="text-align:center;padding:10px;color:#4ade80;font-size:12px;font-weight:700">‡∏ø'+total.toFixed(0)+' logged to budget</div>';
+}
+
+/* ‚îÄ‚îÄ BUDGET TRACKER ‚îÄ‚îÄ */
+var budYear,budMonth;
+function initBudget(){
+  var now=new Date();
+  budYear=now.getFullYear();budMonth=now.getMonth();
+  renderBudget();
+}
+function budNav(d){
+  budMonth+=d;
+  if(budMonth>11){budMonth=0;budYear++;}
+  if(budMonth<0){budMonth=11;budYear--;}
+  renderBudget();
+}
+function renderBudget(){
+  var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('bud-month-label').textContent=months[budMonth]+' '+budYear;
+  var entries=JSON.parse(localStorage.getItem('budget_entries')||'[]');
+  var filtered=entries.filter(function(e){var d=new Date(e.date);return d.getFullYear()===budYear&&d.getMonth()===budMonth;});
+  var target=parseInt(localStorage.getItem('budget_target'))||3000;
+  var total=filtered.reduce(function(s,e){return s+e.amount;},0);
+  var pct=target>0?total/target*100:0;
+  var barColor=pct>100?'rgba(239,68,68,.8)':pct>80?'#fbbf24':'#f472b6';
+  var usd=(total/31).toFixed(0);
+  var daysInMonth=new Date(budYear,budMonth+1,0).getDate();
+  var today=new Date();
+  var daysLeft=(budYear===today.getFullYear()&&budMonth===today.getMonth())?daysInMonth-today.getDate():0;
+  var weeks=Math.max(1,Math.ceil(filtered.length>0?(new Date(filtered[filtered.length-1].date).getDate()/7):1));
+  var avgWeek=(total/Math.max(1,weeks)).toFixed(0);
+  var biggest=filtered.reduce(function(mx,e){return e.amount>mx?e.amount:mx;},0);
+
+  var sh='<div style="display:flex;justify-content:space-between;align-items:flex-start">'
+    +'<div><div style="font-size:28px;font-weight:800">‡∏ø'+total.toFixed(0)+'</div>'
+    +'<div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:2px">~$'+usd+' USD</div></div>'
+    +'<div style="text-align:right"><div style="font-size:11px;color:rgba(255,255,255,.3)">of ‡∏ø<span id="bud-target-val">'+target+'</span> budget</div>'
+    +'<button style="background:none;border:none;font-size:14px;cursor:pointer;margin-top:2px" onclick="editBudTarget()">‚úèÔ∏è</button></div></div>'
+    +'<div class="bud-bar"><div class="bud-fill" style="width:'+Math.min(pct,100)+'%;background:'+barColor+'"></div></div>'
+    +'<div style="font-size:10px;color:rgba(255,255,255,.25);text-align:right">'+pct.toFixed(0)+'% used</div>'
+    +'<div class="bud-stats">'
+    +'<div class="bud-stat"><div class="v">‡∏ø'+avgWeek+'</div><div class="l">avg/week</div></div>'
+    +'<div class="bud-stat"><div class="v">‡∏ø'+biggest+'</div><div class="l">biggest</div></div>'
+    +'<div class="bud-stat"><div class="v">'+daysLeft+'</div><div class="l">days left</div></div>'
+    +'</div>';
+  document.getElementById('bud-summary').innerHTML=sh;
+
+  var eh='';
+  if(!filtered.length){eh='<div style="text-align:center;padding:20px;color:rgba(255,255,255,.2);font-size:12px">No purchases this month</div>';}
+  else{
+    filtered.sort(function(a,b){return new Date(b.date)-new Date(a.date);});
+    filtered.forEach(function(e){
+      var d=new Date(e.date);
+      var ds=d.getDate()+'/'+(d.getMonth()+1);
+      eh+='<div class="bud-entry"><span class="be-date">'+ds+'</span><span class="be-note">'+esc(e.note)+'</span><span class="be-amt">‡∏ø'+e.amount.toFixed(0)+'</span><button class="be-del" onclick="delBudEntry(\''+e.id+'\')">‚úï</button></div>';
+    });
+  }
+  document.getElementById('bud-entries').innerHTML=eh;
+}
+
+function togBudQuick(){document.getElementById('bud-quick').classList.toggle('open');}
+function addBudEntry(){
+  var amt=parseFloat(document.getElementById('bud-amt').value);
+  if(!amt||amt<=0)return;
+  var note=document.getElementById('bud-note').value.trim()||'Purchase';
+  var entries=JSON.parse(localStorage.getItem('budget_entries')||'[]');
+  entries.push({id:'be_'+Date.now(),date:new Date().toISOString(),amount:amt,note:note});
+  localStorage.setItem('budget_entries',JSON.stringify(entries));
+  document.getElementById('bud-amt').value='';
+  document.getElementById('bud-note').value='';
+  document.getElementById('bud-quick').classList.remove('open');
+  renderBudget();
+}
+function delBudEntry(id){
+  var entries=JSON.parse(localStorage.getItem('budget_entries')||'[]');
+  entries=entries.filter(function(e){return e.id!==id;});
+  localStorage.setItem('budget_entries',JSON.stringify(entries));
+  renderBudget();
+}
+function editBudTarget(){
+  var cur=parseInt(localStorage.getItem('budget_target'))||3000;
+  var el=document.getElementById('bud-target-val');
+  if(el.querySelector('input'))return;
+  el.innerHTML='<input class="finp" type="number" id="bud-target-inp" value="'+cur+'" style="width:70px;padding:4px 8px;font-size:12px;display:inline-block" inputmode="numeric"><button style="background:none;border:none;font-size:14px;cursor:pointer;vertical-align:middle" onclick="saveBudTarget()">‚úì</button>';
+  var inp=document.getElementById('bud-target-inp');
+  inp.focus();inp.select();
+  inp.onkeydown=function(e){if(e.key==='Enter')saveBudTarget();};
+}
+function saveBudTarget(){
+  var v=parseInt(document.getElementById('bud-target-inp').value);
+  if(v&&v>0){localStorage.setItem('budget_target',v);}
+  renderBudget();
+}
+
+/* ‚îÄ‚îÄ PATCHED: buildMeals with custom meals ‚îÄ‚îÄ */
+var _origBuildMeals=buildMeals;
+buildMeals=function(di){
+  _origBuildMeals(di);
+  var customs=getCustomForDay(di);
+  if(!customs.length)return;
+  var card=document.getElementById('mcard');
+  var h=card.innerHTML;
+  customs.forEach(function(m){
+    var k='c_'+m.assignId;
+    var done=!!S.chk[k];
+    var mw=m.kcal||1,pp=Math.round(m.p*4/mw*100),cp=Math.round(m.c*4/mw*100),fp=Math.round(m.f*9/mw*100);
+    var steps=m.recipe.map(function(r,si){return '<div class="rs"><div class="sn">'+(si+1)+'</div><div class="st"><span class="sh">'+esc(r.s)+'</span>'+esc(r.t)+'</div></div>';}).join('');
+    h+='<div class="mout">'
+      +'<div class="mhdr"><span class="mty">'+m.ty.toUpperCase()+'</span><span class="mti">¬∑ '+esc(m.ti)+'</span></div>'
+      +'<div class="mrow">'
+        +'<div class="chk'+(done?' on':'')+'" id="ck'+k+'" onclick="doChk(\''+k+'\')">'+(done?CHK:'')+'</div>'
+        +'<div class="minf" id="mi'+k+'" onclick="togD(\''+k+'\')" style="opacity:'+(done?.4:1)+'">'
+          +'<div class="mn">'+esc(m.name)+'<span class="bdg bc">custom</span></div>'
+          +'<div class="md">'+esc(m.desc)+'</div>'
+          +(m.hint?'<div class="mhnt">'+esc(m.hint)+'</div>':'')
+          +'<div class="mhnt" id="hn'+k+'">&#9660; How to make it</div>'
+        +'</div>'
+        +'<div id="kc'+k+'" style="text-align:right;flex-shrink:0;opacity:'+(done?.4:1)+'"><div class="mkn">'+m.kcal+'</div><div class="mku">kcal</div></div>'
+      +'</div>'
+      +'<div class="drw" id="dr'+k+'"><div class="rin"><div class="rtl">HOW TO MAKE IT</div>'+steps
+        +'<div class="mb"><div class="mp" style="width:'+pp+'%"></div><div class="mc" style="width:'+cp+'%"></div><div class="mf" style="width:'+fp+'%"></div></div>'
+        +'<div class="ml"><div class="mli"><div class="md2" style="background:#4ade80"></div>P '+m.p+'g</div><div class="mli"><div class="md2" style="background:#60a5fa"></div>C '+m.c+'g</div><div class="mli"><div class="md2" style="background:#fbbf24"></div>F '+m.f+'g</div></div>'
+      +'</div></div>'
+    +'</div>';
+  });
+  card.innerHTML=h;
+};
+
+/* patch updateRing to include custom meals */
+var _origUpdateRing=updateRing;
+updateRing=function(){
+  _origUpdateRing();
+  var customs=getCustomForDay(S.day);
+  var kc=0,p=0,c=0,f=0;
+  customs.forEach(function(m){
+    var k='c_'+m.assignId;
+    if(S.chk[k]){kc+=m.kcal;p+=m.p;c+=m.c;f+=m.f;}
+  });
+  if(kc===0)return;
+  var d=DAYS[S.day],bkc=0,bp2=0,bc2=0,bf2=0;
+  d.meals.forEach(function(m,i){if(S.chk[S.day+'-'+i]){bkc+=m.kcal;bp2+=m.p;bc2+=m.c;bf2+=m.f;}});
+  var tkc=bkc+kc,tp=bp2+p,tc=bc2+c,tf=bf2+f;
+  var ci=175.93;
+  document.getElementById('rnum').textContent=tkc;
+  document.getElementById('rarc').setAttribute('stroke-dasharray',(Math.min(tkc/T.kcal,1)*ci)+' '+ci);
+  document.getElementById('bp').style.width=Math.min(tp/T.p*100,100)+'%';
+  document.getElementById('bc').style.width=Math.min(tc/T.c*100,100)+'%';
+  document.getElementById('bf').style.width=Math.min(tf/T.f*100,100)+'%';
+  document.getElementById('vp').textContent=tp+'/120g';
+  document.getElementById('vc').textContent=tc+'/115g';
+  document.getElementById('vf').textContent=tf+'/42g';
+  document.getElementById('rmsg').textContent=tkc>=T.kcal?'Target hit! \uD83C\uDFAF':(T.kcal-tkc)+' kcal remaining';
+};
+
+
+/* ‚îÄ‚îÄ INIT ‚îÄ‚îÄ */
+loadS();loadCustom();
+buildMeals(S.day);updateRing();
+buildGroc();initBudget();
+if(S.day>0){
+  document.getElementById('dt0').classList.remove('on');
+  document.getElementById('dt'+S.day).classList.add('on');
+  document.getElementById('dlabel').textContent=DAYS[S.day].label;
+}
+</script>
+</body>
+</html>
